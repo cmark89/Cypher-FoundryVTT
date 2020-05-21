@@ -84,7 +84,7 @@ Hooks.on("renderChatMessage", (app, html, data) => {
             $(newContent).insertBefore(dt);
         }
 
-        if (game.settings.get("numenera", "d20Rolling") === "taskLevels") {
+        if (game.settings.get("cypher", "d20Rolling") === "taskLevels") {
             const rolled = roll.dice[0].rolls[0].roll;
             const taskLevel = Math.floor(rolled / 3);
             const skillLevel = (roll.total - rolled) / 3;

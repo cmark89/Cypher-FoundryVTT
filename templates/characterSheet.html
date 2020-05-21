@@ -167,7 +167,9 @@
                                 {{checked skill.data.specialized}} data-dtype="Boolean" />
                         </td>
                         <td>
+                            <!-- Disabling skill rolls for now until functionality is improved
                             <a class="rollable"><img src="/icons/svg/d20-grey.svg" alt="d20" /></a>
+                            -->
                             <a class="skill-delete" data-action="delete" title="Delete"><i class="fas fa-trash"></i></a>
                         </td>
                     </tr>
@@ -383,7 +385,9 @@
                                 <p>
                                     <span><strong>Depletion: </strong></span> {{artifact.data.depletion.threshold}} in
                                     {{artifact.data.depletion.die}}
-                                    <button class="artifact-depletion-roll">Roll</button>
+                                    <!-- Disabling artifact depletion rolls for now 
+                                    <a class="artifact-depletion-roll rollable"><img src="/icons/svg/d20-grey.svg" alt="d20" /></a>
+                                    -->
                                 </p>
                                 {{/if}}
                             </td>
