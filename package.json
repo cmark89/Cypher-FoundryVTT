@@ -1,7 +1,7 @@
 {
-  "name": "numenera-foundryvtt",
-  "version": "0.7.0",
-  "description": "Support for the Numenera role playing game for the Foundry virtual tabletop",
+  "name": "cypher-foundryvtt",
+  "version": "0.1.0",
+  "description": "A fork of SolarBear's Numenera system for use with non-specific Cypher System games.",
   "dependencies": {},
   "devDependencies": {
     "ava": "^3.8.2",
@@ -18,7 +18,7 @@
     "rollup-plugin-zip": "^0.7.0",
     "terser": "^4.6.13"
   },
-  "main": "numenera.js",
+  "main": "cypher.js",
   "scripts": {
     "_css": "gulp css",
     "_clear": "rimraf dist/** *.zip",
@@ -34,12 +34,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SolarBear/Numenera-FoundryVTT.git"
+    "url": "git+https://github.com/cmark89/Cypher-FoundryVTT.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/SolarBear/Numenera-FoundryVTT/issues"
+    "url": "https://github.com/cmark89/Cypher-FoundryVTT/issues"
   },
-  "homepage": "https://github.com/SolarBear/Numenera-FoundryVTT#readme"
+  "homepage": "https://github.com/cmark89/Cypher-FoundryVTT#readme"
 }

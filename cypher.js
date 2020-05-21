@@ -21,7 +21,7 @@ import { NumeneraWeaponItemSheet } from './module/item/sheets/NumeneraWeaponItem
 import { migrateWorld } from './module/migrations/migrate.js';
 
 Hooks.once("init", function() {
-    console.log('Numenera | Initializing Numenera System');
+    console.log('Cypher | Initializing Cypher System');
 
     // Record Configuration Values
     CONFIG.NUMENERA = NUMENERA;
