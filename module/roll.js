@@ -14,19 +14,19 @@ export function rollText(dieRoll) {
     case 1:
       return {
         text: "GM Intrusion",
-        color: 0x000000,
+        color: "#CC0000",
       }
 
     case 19:
       return {
         text: "Minor Effect",
-        color: 0x000000,
+        color: "#007700",
       }
 
     case 20:
       return {
         text: "Major Effect",
-        color: 0x000000,
+        color: "#00CC00",
       }
 
     default:

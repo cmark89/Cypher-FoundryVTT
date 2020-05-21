@@ -69,9 +69,10 @@ Hooks.on('renderActorDirectory', (app, html, options) => {
 
 Hooks.on("renderChatMessage", (app, html, data) => {
     const roll = JSON.parse(data.message.roll);
+    const isRollTable = app.data.flags && app.data.flags.core && app.data.flags.core.RollTable;
 
-    //Don't apply ChatMessage enhancement to recovery rolls
-    if (roll && roll.dice[0].faces === 20)
+    //Don't apply ChatMessage enhancement to recovery rolls or to rollable tables
+    if (roll && roll.dice[0].faces === 20 && !isRollTable)
     {
         const special = rollText(roll.total);
         const dt = html.find("h4.dice-total")[0];
@@ -79,7 +80,7 @@ Hooks.on("renderChatMessage", (app, html, data) => {
         //"special" refers to special attributes: minor/major effect or GM intrusion text, special background, etc.
         if (special) {
             const { text, color } = special;
-            const newContent = `<span class="numenera-message-special">${text}</span>`;
+            const newContent = `<span class="numenera-message-special" style="color: ${color}">${text}</span>`;
 
             $(newContent).insertBefore(dt);
         }
@@ -90,7 +91,7 @@ Hooks.on("renderChatMessage", (app, html, data) => {
             const skillLevel = (roll.total - rolled) / 3;
             const sum = taskLevel + skillLevel;
 
-            let text = `Success Level ${sum}`;
+            let text = `[${rolled}] Success Level ${sum}`;
 
             if (skillLevel !== 0) {
                 const sign = sum > 0 ? "+" : "-";
