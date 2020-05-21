@@ -2,7 +2,7 @@ const gulp = require('gulp');
 const sass = require('gulp-sass');
 
 const css = gulp.series(() => {
-  return gulp.src("sass/**/numenera.scss")
+  return gulp.src("sass/**/cypher.scss")
     .pipe(sass().on('error', sass.logError))
     .pipe(gulp.dest("./"))
 });

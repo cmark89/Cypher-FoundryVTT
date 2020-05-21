@@ -21,7 +21,7 @@ import { NumeneraWeaponItemSheet } from './module/item/sheets/NumeneraWeaponItem
 import { migrateWorld } from './module/migrations/migrate.js';
 
 Hooks.once("init", function() {
-    console.log('Numenera | Initializing Numenera System');
+    console.log('Cypher | Initializing Cypher System');
 
     // Record Configuration Values
     CONFIG.NUMENERA = NUMENERA;
@@ -68,24 +68,39 @@ Hooks.on('renderActorDirectory', (app, html, options) => {
 });
 
 Hooks.on("renderChatMessage", (app, html, data) => {
-    //Here, "app" is the ChatMessage object
+    const roll = JSON.parse(data.message.roll);
+    const isRollTable = app.data.flags && app.data.flags.core && app.data.flags.core.RollTable;
 
-    //Don't apply ChatMessage enhancement to recovery rolls
-    if (app.roll && app.roll.dice[0].faces === 20)
+    //Don't apply ChatMessage enhancement to recovery rolls or to rollable tables
+    if (roll && roll.dice[0].faces === 20 && !isRollTable)
     {
-        const dieRoll = app.roll.dice[0].rolls[0].roll;
-        const special = rollText(dieRoll);
+        const special = rollText(roll.total);
+        const dt = html.find("h4.dice-total")[0];
 
         //"special" refers to special attributes: minor/major effect or GM intrusion text, special background, etc.
-        if (!special)
-            return;
+        if (special) {
+            const { text, color } = special;
+            const newContent = `<span class="numenera-message-special" style="color: ${color}">${text}</span>`;
 
-        const { text, color } = special;
+            $(newContent).insertBefore(dt);
+        }
 
-        const newContent = `<span class="numenera-message-special">${text}</span>`;
+        if (game.settings.get("cypher", "d20Rolling") === "taskLevels") {
+            const rolled = roll.dice[0].rolls[0].roll;
+            const taskLevel = Math.floor(rolled / 3);
+            const skillLevel = (roll.total - rolled) / 3;
+            const sum = taskLevel + skillLevel;
 
-        const dt = html.find("h4.dice-total");
-        $(newContent).insertBefore(dt);
+            let text = `[${rolled}] Success Level ${sum}`;
+
+            if (skillLevel !== 0) {
+                const sign = sum > 0 ? "+" : "-";
+                text += ` (${taskLevel}${sign}${skillLevel})`;
+            }
+
+            dt.textContent = text;
+        }
+
     }
 });
 

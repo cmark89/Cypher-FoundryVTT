@@ -9,7 +9,7 @@ const destinationDir = 'dist';
 const toBundle = [
     'template.json',
     'system.json',
-    'numenera.css',
+    'cypher.css',
     "fonts/ogirema.ttf",
     "fonts/source.txt",
     "lib/dragula/dragula.min.css",
@@ -28,7 +28,7 @@ const toBundle = [
 ];
 
 export default [{
-    input: 'numenera.js',
+    input: 'cypher.js',
     output: {
         dir: destinationDir,
         format: 'umd',
