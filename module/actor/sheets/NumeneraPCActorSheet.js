@@ -19,8 +19,8 @@ const dragulaOptions = {
 //Sort function for order
 const sortFunction = (a, b) => a.data.order < b.data.order ? -1 : a.data.order > b.data.order ? 1 : 0;
 
-function onItemCreate(itemName, itemClass) {
-  return function() {
+function onItemCreate(itemName, itemClass, callback = null) {
+  return async function() {
     event.preventDefault();
 
     const itemData = {
@@ -29,11 +29,15 @@ function onItemCreate(itemName, itemClass) {
       data: new itemClass({}),
     };
 
-    return this.actor.createOwnedItem(itemData);
+    const newItem = await this.actor.createOwnedItem(itemData);
+    if (callback)
+      callback(newItem);
+
+    return newItem;
   }
 }
 
-function onItemEditGenerator(editClass) {
+function onItemEditGenerator(editClass, callback = null) {
   return async function (event) {
     event.preventDefault();
 
@@ -73,11 +77,13 @@ function onItemEditGenerator(editClass) {
       }
     }
 
-    await this.actor.updateEmbeddedEntity("OwnedItem", updated);
+    const updatedItem = await this.actor.updateEmbeddedEntity("OwnedItem", updated);
+    if (callback)
+      callback(updatedItem);
   }
 }
 
-function onItemDeleteGenerator(deleteType) {
+function onItemDeleteGenerator(deleteType, callback = null) {
   return async function (event) {
     event.preventDefault();
 
@@ -85,6 +91,9 @@ function onItemDeleteGenerator(deleteType) {
       const elem = event.currentTarget.closest("." + deleteType);
       const itemId = elem.dataset.itemId;
       this.actor.deleteOwnedItem(itemId);
+
+      if (callback)
+        callback();
     }
   }
 }
@@ -144,14 +153,14 @@ export class NumeneraPCActorSheet extends ActorSheet {
 
     //Creation event handlers
     this.onAbilityCreate = onItemCreate("ability", NumeneraAbilityItem);
-    this.onArmorCreate = onItemCreate("armor", NumeneraArmorItem);
+    this.onArmorCreate = onItemCreate("armor", NumeneraArmorItem, this.onArmorUpdated.bind(this));
     this.onEquipmentCreate = onItemCreate("equipment", NumeneraEquipmentItem);
     this.onSkillCreate = onItemCreate("skill", NumeneraSkillItem);
     this.onWeaponCreate = onItemCreate("weapon", NumeneraWeaponItem);
 
     //Edit event handlers
     this.onAbilityEdit = onItemEditGenerator(".ability");
-    this.onArmorEdit = onItemEditGenerator(".armor");
+    this.onArmorEdit = onItemEditGenerator(".armor", this.onArmorUpdated.bind(this));
     this.onArtifactEdit = onItemEditGenerator(".artifact");
     this.onCypherEdit = onItemEditGenerator(".cypher");
     this.onEquipmentEdit = onItemEditGenerator(".equipment");
@@ -160,7 +169,7 @@ export class NumeneraPCActorSheet extends ActorSheet {
 
     //Delete event handlers
     this.onAbilityDelete = onItemDeleteGenerator("ability");
-    this.onArmorDelete = onItemDeleteGenerator("armor");
+    this.onArmorDelete = onItemDeleteGenerator("armor", this.onArmorUpdated.bind(this));
     this.onArtifactDelete = onItemDeleteGenerator("artifact");
     this.onCypherDelete = onItemDeleteGenerator("cypher");
     this.onEquipmentDelete = onItemDeleteGenerator("equipment");
@@ -364,6 +373,7 @@ export class NumeneraPCActorSheet extends ActorSheet {
 
     const artifactsList = html.find("ul.artifacts");
     html.find("ul.artifacts").on("click", ".artifact-delete", this.onArtifactDelete.bind(this));
+    html.find("ul.artifacts").on("click", ".artifact-depletion-roll", this.onArtifactDepletionRoll.bind(this));
 
     const cyphersList = html.find("ul.cyphers");
     html.find("ul.cyphers").on("click", ".cypher-delete", this.onCypherDelete.bind(this));
@@ -423,6 +433,35 @@ export class NumeneraPCActorSheet extends ActorSheet {
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
       flavor: `Rolling ${skill.name}`,
     });
+  }
+
+  onArtifactDepletionRoll(event) {
+    event.preventDefault();
+    const artifactId = event.target.closest(".artifact").dataset.itemId;
+
+    if (!artifactId)
+      return;
+
+    const artifact = this.actor.getOwnedItem(artifactId);
+    const depletion = artifact.data.data.depletion;
+    if (!depletion.isDepleting || !depletion.die || !depletion.threshold)
+      return;
+
+    const roll = new Roll(depletion.die).roll();
+    const depleted = (roll.total <= depletion.threshold);
+
+    roll.toMessage({
+      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+      flavor: `Depletion roll for ${artifact.name}<br/>Threshold: ${depletion.threshold}`,
+    });
+  }
+
+  onArmorUpdated(armor) {
+      const newTotal = this.actor.getTotalArmor();
+
+      if (newTotal !== this.actor.data.armor) {
+        this.actor.update({"data.armor": newTotal});
+      }
   }
 
   /*
