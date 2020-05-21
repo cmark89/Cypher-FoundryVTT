@@ -19,7 +19,7 @@ export const registerSystemSettings = function() {
   /**
    * Configure d20-rolling options
    */
-  game.settings.register("numenera", "d20Rolling", {
+  game.settings.register("cypher", "d20Rolling", {
     name: "d20 rolling",
     hint: "Select the behavior of d20 rolls in your game",
     scope: "world",
