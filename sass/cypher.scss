@@ -208,6 +208,10 @@ form.numenera {
                 }
             }
 
+            h3.cypher-limit-warning {
+                font-weight: bold;
+            }
+
             input.cypher-type {
                 width: auto;
             }
@@ -229,7 +233,6 @@ form.numenera {
 
                 button.roll {
                     margin-left: 1em;
-                    background-image: url("/icons/svg/d20-grey.svg"); //!important
                 }
             }
         }
@@ -322,11 +325,15 @@ form.numenera {
     }
 
     div.description  {
-        height: 450px;
+        height: 425px;
         
         .editor {
             height: 100%;
-          }
+        }
+
+        button#save-bio {
+            width: 99%;
+        }
     }
 
     div.item {

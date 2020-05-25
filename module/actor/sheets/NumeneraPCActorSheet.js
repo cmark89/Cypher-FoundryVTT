@@ -49,7 +49,7 @@ function onItemEditGenerator(editClass, callback = null) {
       throw new Error(`No itemID on ${editClass} element`);
       
     const updated = {_id: elem.dataset.itemId};
-    
+
     const splitName = event.currentTarget.name.split(".");
     const idIndex = splitName.indexOf(updated._id);
     const parts = splitName.splice(idIndex + 1);
@@ -187,7 +187,7 @@ export class NumeneraPCActorSheet extends ActorSheet {
    * @type {String}
    */
   get template() {
-    return "systems/cypher/templates/characterSheet.html";
+    return "systems/numenera/templates/characterSheet.html";
   }
 
   /**
@@ -197,19 +197,18 @@ export class NumeneraPCActorSheet extends ActorSheet {
   getData() {
     const sheetData = super.getData();
 
-    const useCypherTypes = (game.settings.get("cypher", "systemVersion") === 1);
+    const useCypherTypes = (game.settings.get("numenera", "systemVersion") === 1);
     sheetData.displayCypherType = useCypherTypes;
-	
-	// Add relevant data from system settings
-	sheetData.settings = { 
-		icons: {} 
-  };
-  
-	sheetData.settings.icons.abilities = game.settings.get("cypher", "showAbilityIcons");
-	sheetData.settings.icons.skills = game.settings.get("cypher", "showSkillIcons");
-	sheetData.settings.icons.numenera = game.settings.get("cypher", "showNumeneraIcons");
-	sheetData.settings.icons.equipment = game.settings.get("cypher", "showEquipmentIcons");
 
+    // Add relevant data from system settings
+    sheetData.settings = {
+      icons: {}
+    };
+
+    sheetData.settings.icons.abilities = game.settings.get("numenera", "showAbilityIcons");
+    sheetData.settings.icons.skills = game.settings.get("numenera", "showSkillIcons");
+    sheetData.settings.icons.numenera = game.settings.get("numenera", "showNumeneraIcons");
+    sheetData.settings.icons.equipment = game.settings.get("numenera", "showEquipmentIcons");
 
     //Copy labels to be used as is
     sheetData.ranges = NUMENERA.ranges;
@@ -293,39 +292,42 @@ export class NumeneraPCActorSheet extends ActorSheet {
           cypher.data.cypherType = "Unknown";
         }
       }
-	    cypher.showIcon = cypher.img && sheetData.settings.icons.numenera;
+
+      cypher.showIcon = cypher.img && sheetData.settings.icons.numenera;
       return cypher;
     });
 
     sheetData.data.items.oddities = sheetData.data.items.oddities.map(oddity => {
-	    oddity.showIcon = oddity.img && sheetData.settings.icons.numenera;
+      oddity.showIcon = oddity.img && sheetData.settings.icons.numenera;
       return oddity;
     });
+
+    sheetData.displayCypherLimitWarning = this.actor.isOverCypherLimit();
 
     //TODO put ranges, stats, etc. as globally available data for the sheet instead of repeating
     sheetData.data.items.abilities = sheetData.data.items.abilities.map(ability => {
       ability.nocost = (ability.data.cost.amount <= 0);
       ability.ranges = NUMENERA.optionalRanges;
       ability.stats = NUMENERA.stats;
-	    ability.showIcon = ability.img && sheetData.settings.icons.abilities;
+      ability.showIcon = ability.img && sheetData.settings.icons.abilities;
       return ability;
     });
 
     sheetData.data.items.skills = sheetData.data.items.skills.map(skill => {
       skill.stats = NUMENERA.stats;
-	    skill.showIcon = skill.img && sheetData.settings.icons.skills;
+      skill.showIcon = skill.img && sheetData.settings.icons.skills;
       return skill;
     });
-	
-	sheetData.data.items.weapons = sheetData.data.items.weapons.map(weapon => {
+
+    sheetData.data.items.weapons = sheetData.data.items.weapons.map(weapon => {
       weapon.showIcon = weapon.img && sheetData.settings.icons.equipment;
       return weapon;
     });
-	sheetData.data.items.armor = sheetData.data.items.armor.map(armor => {
+    sheetData.data.items.armor = sheetData.data.items.armor.map(armor => {
       armor.showIcon = armor.img && sheetData.settings.icons.equipment;
       return armor;
     });
-	sheetData.data.items.equipment = sheetData.data.items.equipment.map(equipment => {
+    sheetData.data.items.equipment = sheetData.data.items.equipment.map(equipment => {
       equipment.showIcon = equipment.img && sheetData.settings.icons.equipment;
       return equipment;
     });
@@ -448,7 +450,6 @@ export class NumeneraPCActorSheet extends ActorSheet {
       return;
 
     const roll = new Roll(depletion.die).roll();
-    const depleted = (roll.total <= depletion.threshold);
 
     roll.toMessage({
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
@@ -456,12 +457,13 @@ export class NumeneraPCActorSheet extends ActorSheet {
     });
   }
 
-  onArmorUpdated(armor) {
-      const newTotal = this.actor.getTotalArmor();
+  async onArmorUpdated() {
+    const newTotal = this.actor.getTotalArmor();
 
-      if (newTotal !== this.actor.data.armor) {
-        this.actor.update({"data.armor": newTotal});
-      }
+    if (newTotal !== this.actor.data.armor) {
+      await this.actor.update({"data.armor": newTotal});
+      this.render();
+    }
   }
 
   /*
@@ -475,5 +477,12 @@ export class NumeneraPCActorSheet extends ActorSheet {
     }
     
     super._onChangeInput(event);
+  }
+
+  _onDrop(event) {
+    super._onDrop(event);
+    
+    //Necessary because dropping a new armor from the directory would not update the Armor field
+    this.onArmorUpdated();
   }
 }
