@@ -1,13 +1,7 @@
 {
-<<<<<<< HEAD
   "name": "cypher-foundryvtt",
   "version": "0.1.0",
   "description": "A fork of SolarBear's Numenera system for use with non-specific Cypher System games.",
-=======
-  "name": "numenera-foundryvtt",
-  "version": "0.8.0",
-  "description": "Support for the Numenera role playing game for the Foundry virtual tabletop",
->>>>>>> 70e76b0bf1bfa43c86438be869349d9414c7b4d7
   "dependencies": {},
   "devDependencies": {
     "ava": "^3.8.2",
