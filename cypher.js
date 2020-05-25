@@ -145,7 +145,7 @@ Hooks.on("getActorDirectoryEntryContext", (html, entryOptions) => {
                 })
                 .map(usersPermissions => usersPermissions[0]);
 
-            game.socket.emit("system.numenera", {type: "gmIntrusion", data: {
+            game.socket.emit("system.cypher", {type: "gmIntrusion", data: {
                 userIds: ownerIds,
                 actorId: actor.data._id,
             }});

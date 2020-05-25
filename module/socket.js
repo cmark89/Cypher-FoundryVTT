@@ -1,7 +1,7 @@
 import { GMIntrusionDialog } from "./apps/GMIntrusionDialog.js";
 
 export function numeneraSocketListeners() {
-  game.socket.on("system.numenera", handleGMIntrusion);
+  game.socket.on("system.cypher", handleGMIntrusion);
 }
 
 function handleGMIntrusion(args) {

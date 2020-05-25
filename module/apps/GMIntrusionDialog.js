@@ -18,7 +18,7 @@ export class GMIntrusionDialog extends Dialog {
 	    template: "templates/hud/dialog.html",
       classes: ["dialog"],
       width: 500,
-      classes: ["numenera", "dialog"],
+      classes: ["cypher", "dialog"],
     });
   }
 
