@@ -38,18 +38,18 @@ Hooks.once("init", function() {
 
     // Register sheet application classes
     Actors.unregisterSheet("core", ActorSheet);
-    Actors.registerSheet("numenera", NumeneraNPCActorSheet, { types: ["npc"], makeDefault: true });
-    Actors.registerSheet("numenera", NumeneraPCActorSheet, { types: ["pc"], makeDefault: true });
+    Actors.registerSheet("cypher", NumeneraNPCActorSheet, { types: ["npc"], makeDefault: true });
+    Actors.registerSheet("cypher", NumeneraPCActorSheet, { types: ["pc"], makeDefault: true });
 
     Items.unregisterSheet("core", ItemSheet);
-    Items.registerSheet("numenera", NumeneraAbilityItemSheet, { types: ["ability"], makeDefault: true });
-    Items.registerSheet("numenera", NumeneraArmorItemSheet, { types: ["armor"], makeDefault: true });
-    Items.registerSheet("numenera", NumeneraArtifactItemSheet, { types: ["artifact"], makeDefault: true });
-    Items.registerSheet("numenera", NumeneraCypherItemSheet, { types: ["cypher"], makeDefault: true });
-    Items.registerSheet("numenera", NumeneraEquipmentItemSheet, { types: ["equipment"], makeDefault: true });
-    Items.registerSheet("numenera", NumeneraOddityItemSheet, { types: ["oddity"], makeDefault: true });
-    Items.registerSheet("numenera", NumeneraSkillItemSheet, { types: ["skill"], makeDefault: true });
-    Items.registerSheet("numenera", NumeneraWeaponItemSheet, { types: ["weapon"], makeDefault: true });
+    Items.registerSheet("cypher", NumeneraAbilityItemSheet, { types: ["ability"], makeDefault: true });
+    Items.registerSheet("cypher", NumeneraArmorItemSheet, { types: ["armor"], makeDefault: true });
+    Items.registerSheet("cypher", NumeneraArtifactItemSheet, { types: ["artifact"], makeDefault: true });
+    Items.registerSheet("cypher", NumeneraCypherItemSheet, { types: ["cypher"], makeDefault: true });
+    Items.registerSheet("cypher", NumeneraEquipmentItemSheet, { types: ["equipment"], makeDefault: true });
+    Items.registerSheet("cypher", NumeneraOddityItemSheet, { types: ["oddity"], makeDefault: true });
+    Items.registerSheet("cypher", NumeneraSkillItemSheet, { types: ["skill"], makeDefault: true });
+    Items.registerSheet("cypher", NumeneraWeaponItemSheet, { types: ["weapon"], makeDefault: true });
     
     registerSystemSettings();
     preloadHandlebarsTemplates();
