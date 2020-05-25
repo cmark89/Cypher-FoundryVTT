@@ -197,7 +197,7 @@ export class NumeneraPCActorSheet extends ActorSheet {
   getData() {
     const sheetData = super.getData();
 
-    const useCypherTypes = (game.settings.get("numenera", "systemVersion") === 1);
+    const useCypherTypes = (game.settings.get("cypher", "systemVersion") === 1);
     sheetData.displayCypherType = useCypherTypes;
 
     // Add relevant data from system settings
@@ -205,10 +205,10 @@ export class NumeneraPCActorSheet extends ActorSheet {
       icons: {}
     };
 
-    sheetData.settings.icons.abilities = game.settings.get("numenera", "showAbilityIcons");
-    sheetData.settings.icons.skills = game.settings.get("numenera", "showSkillIcons");
-    sheetData.settings.icons.numenera = game.settings.get("numenera", "showNumeneraIcons");
-    sheetData.settings.icons.equipment = game.settings.get("numenera", "showEquipmentIcons");
+    sheetData.settings.icons.abilities = game.settings.get("cypher", "showAbilityIcons");
+    sheetData.settings.icons.skills = game.settings.get("cypher", "showSkillIcons");
+    sheetData.settings.icons.numenera = game.settings.get("cypher", "showNumeneraIcons");
+    sheetData.settings.icons.equipment = game.settings.get("cypher", "showEquipmentIcons");
 
     //Copy labels to be used as is
     sheetData.ranges = NUMENERA.ranges;
