@@ -21,7 +21,7 @@ export class NumeneraWeaponItemSheet extends ItemSheet {
      * @type {String}
      */
     get template() {
-        return "systems/numenera/templates/item/weaponSheet.html";
+        return "systems/cypher/templates/item/weaponSheet.html";
     }
 
     getData() {

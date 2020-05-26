@@ -21,7 +21,7 @@ export class NumeneraSkillItemSheet extends ItemSheet {
      * @type {String}
      */
     get template() {
-        return "systems/numenera/templates/item/skillSheet.html";
+        return "systems/cypher/templates/item/skillSheet.html";
     }
 
     getData() {

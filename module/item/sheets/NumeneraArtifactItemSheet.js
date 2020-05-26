@@ -19,6 +19,6 @@ export class NumeneraArtifactItemSheet extends ItemSheet {
      * @type {String}
      */
     get template() {
-        return "systems/numenera/templates/item/artifactSheet.html";
+        return "systems/cypher/templates/item/artifactSheet.html";
     }
 }

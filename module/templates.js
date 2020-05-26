@@ -9,17 +9,17 @@ export const preloadHandlebarsTemplates = async() => {
     const templatePaths = [
 
         // Actor Sheets
-        "systems/numenera/templates/characterSheet.html",
-        "systems/numenera/templates/npcSheet.html",
+        "systems/cypher/templates/characterSheet.html",
+        "systems/cypher/templates/npcSheet.html",
 
         //Item sheets
-        "systems/numenera/templates/item/abilitySheet.html",
-        "systems/numenera/templates/item/armorSheet.html",
-        "systems/numenera/templates/item/artifactSheet.html",
-        "systems/numenera/templates/item/cypherSheet.html",
-        "systems/numenera/templates/item/equipmentSheet.html",
-        "systems/numenera/templates/item/skillSheet.html",
-        "systems/numenera/templates/item/weaponSheet.html",
+        "systems/cypher/templates/item/abilitySheet.html",
+        "systems/cypher/templates/item/armorSheet.html",
+        "systems/cypher/templates/item/artifactSheet.html",
+        "systems/cypher/templates/item/cypherSheet.html",
+        "systems/cypher/templates/item/equipmentSheet.html",
+        "systems/cypher/templates/item/skillSheet.html",
+        "systems/cypher/templates/item/weaponSheet.html",
     ];
 
     // Load the template parts

@@ -21,7 +21,7 @@ export class NumeneraCypherItemSheet extends ItemSheet {
      * @type {String}
      */
     get template() {
-        return "systems/numenera/templates/item/cypherSheet.html";
+        return "systems/cypher/templates/item/cypherSheet.html";
     }
 
     get type() {

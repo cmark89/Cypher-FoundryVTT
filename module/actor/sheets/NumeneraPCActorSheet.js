@@ -185,7 +185,7 @@ export class NumeneraPCActorSheet extends ActorSheet {
    * @type {String}
    */
   get template() {
-    return "systems/numenera/templates/characterSheet.html";
+    return "systems/cypher/templates/characterSheet.html";
   }
 
   /**
