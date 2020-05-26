@@ -195,9 +195,6 @@ export class NumeneraPCActorSheet extends ActorSheet {
   getData() {
     const sheetData = super.getData();
 
-    const useCypherTypes = (game.settings.get("cypher", "systemVersion") === 1);
-    sheetData.displayCypherType = useCypherTypes;
-
     // Add relevant data from system settings
     sheetData.settings = {
       icons: {}
@@ -214,9 +211,6 @@ export class NumeneraPCActorSheet extends ActorSheet {
     sheetData.weaponTypes = NUMENERA.weaponTypes;
     sheetData.weights = NUMENERA.weightClasses;
     sheetData.optionalWeights = NUMENERA.optionalWeightClasses;
-
-    if (useCypherTypes)
-      sheetData.cypherTypes = NUMENERA.cypherTypes;
 
     sheetData.advances = Object.entries(sheetData.actor.data.advances).map(
       ([key, value]) => {
@@ -283,10 +277,6 @@ export class NumeneraPCActorSheet extends ActorSheet {
         cypher.name = "Unidentified Cypher";
         cypher.data.level = "Unknown";
         cypher.data.effect = "Unknown";
-
-        if (useCypherTypes) {
-          cypher.data.cypherType = "Unknown";
-        }
       }
 
       cypher.showIcon = cypher.img && sheetData.settings.icons.numenera;

@@ -31,13 +31,6 @@ export class NumeneraCypherItemSheet extends ItemSheet {
     getData() {
         const sheetData = super.getData();
 
-        const useCypherTypes = (game.settings.get("cypher", "systemVersion") === 1);
-        sheetData.useCypherTypes = useCypherTypes;
-
-        if (useCypherTypes) {
-            sheetData.cypherTypes = NUMENERA.cypherTypes;
-        }
-
         return sheetData;
     }
 }

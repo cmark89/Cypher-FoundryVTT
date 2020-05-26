@@ -153,28 +153,7 @@ export class NumeneraPCActor extends Actor {
 
   isOverCypherLimit() {
     const cyphers = this.getEmbeddedCollection("OwnedItem").filter(i => i.type === "cypher");
-
-    switch (game.settings.get("cypher", "systemVersion")) {
-      case 1:
-        return this._isOverCypherLimitv1(cyphers);
-
-      case 2:
-        return this._isOverCypherLimitv2(cyphers);
-
-      default:
-        throw new Error("Unhandled version");
-    }
-  }
-
-  _isOverCypherLimitv1(cyphers) {
-    //In v1 parlance, occultic cyphers count as 2
-    return this.data.data.cypherLimit < cyphers.reduce((acc, cypher) =>
-      acc + (cypher.data.cypherType === "Occultic" ?  2 : 1)
-    , 0);
-  }
-
-  _isOverCypherLimitv2(cyphers) {
-    return this.data.data.cypherLimit < cyphers.length;
+    return  this.data.data.cypherLimit < cyphers.length;
   }
 
   /**
