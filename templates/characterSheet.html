@@ -83,8 +83,8 @@
     <nav class="sheet-tabs tabs" data-group="primary">
         <a class="item" data-tab="skills">Skills</a>
         <a class="item" data-tab="abilities">Abilities</a>
-        <a class="item" data-tab="numenera">Numenera</a>
-        <a class="item" data-tab="equipment">Equipment</a>
+        <a class="item" data-tab="equipment">Inventory</a>
+        <a class="item" data-tab="numenera">Cyphers</a>
         <a class="item" data-tab="bio">Bio</a>
     </nav>
 
@@ -300,67 +300,6 @@
                 No cyphers.
                 {{/each}}
             </ul>
-
-            <hr class="sheet-one" />
-
-            <h2>Artifacts</h2>
-            <ul class="artifacts">
-                {{#each data.items.artifacts as |artifact|}}
-                <li class="artifact" data-item-id={{artifact._id}} data-order={{artifact.data.order}}>
-                    <table class="artifact-header-table">
-                        <tbody>
-                            <td>
-                                <h4>
-                                    <a><i class="fas fa-grip-vertical handle"></i></a>
-                                </h4>
-                            </td>
-                        {{#if artifact.showIcon}}
-                            <td class="ability-icon">
-                                <img src="{{artifact.img}}" />
-                            </td>
-                        {{/if}}
-                            <td class="artifact-name">
-                                <h4><strong>{{artifact.name}}</strong></h4>
-                            </td>
-                            <td class="artifact-level">
-                            {{#if artifact.editable}}
-                                <label>Identified?
-                                    <input type="checkbox" name="data.items.artifacts.{{artifact._id}}.data.identified" data-dtype="Boolean" {{checked artifact.data.identified}}/>
-                                </label>
-                                <br />
-                                <label>Level
-                                    <input type="number" name="data.items.artifacts.{{artifact._id}}.data.level" min="1" value="{{artifact.data.level}}"/>
-                                </label>
-                            {{else}}
-                                <span>Level</span> {{artifact.data.level}}
-                            {{/if}}
-                            </td>
-
-                            <td class="artifact-description">
-                                <p>
-                                    <span><strong>Form:</strong></span> {{artifact.data.form}}
-                                </p>
-                                <p>
-                                    <span><strong>Effect:</strong></span> {{artifact.data.effect}}
-                                </p>
-                            {{#if artifact.data.depletion.isDepleting}}
-                                <p>
-                                    <span><strong>Depletion: </strong></span> {{artifact.data.depletion.threshold}} in
-                                    {{artifact.data.depletion.die}}
-                                    <button class="artifact-depletion-roll">Roll</button>
-                                </p>
-                            {{/if}}
-                            </td>
-                            <td>
-                                <a class="artifact-delete" data-action="delete" title="Delete"><i class="fas fa-trash"></i></a>
-                            </td>
-                        </tbody>
-                    </table>
-                </li>
-                {{else}}
-                No artifacts.
-                {{/each}}
-            </ul>
         </div>
     
         <div class="tab equipment" data-group="primary" data-tab="equipment">
@@ -508,7 +447,7 @@
                 </tbody>
             </table>
 
-            <h2>Other Items</h2>
+            <h2>Equipment</h2>
             <table class="equipment">
                 <thead>
                     <td>
@@ -555,6 +494,67 @@
                 {{/each}}
                 </tbody>
             </table>
+
+            <hr class="sheet-one" />
+
+            <h2>Artifacts</h2>
+            <ul class="artifacts">
+                {{#each data.items.artifacts as |artifact|}}
+                <li class="artifact" data-item-id={{artifact._id}} data-order={{artifact.data.order}}>
+                    <table class="artifact-header-table">
+                        <tbody>
+                            <td>
+                                <h4>
+                                    <a><i class="fas fa-grip-vertical handle"></i></a>
+                                </h4>
+                            </td>
+                        {{#if artifact.showIcon}}
+                            <td class="ability-icon">
+                                <img src="{{artifact.img}}" />
+                            </td>
+                        {{/if}}
+                            <td class="artifact-name">
+                                <h4><strong>{{artifact.name}}</strong></h4>
+                            </td>
+                            <td class="artifact-level">
+                            {{#if artifact.editable}}
+                                <label>Identified?
+                                    <input type="checkbox" name="data.items.artifacts.{{artifact._id}}.data.identified" data-dtype="Boolean" {{checked artifact.data.identified}}/>
+                                </label>
+                                <br />
+                                <label>Level
+                                    <input type="number" name="data.items.artifacts.{{artifact._id}}.data.level" min="1" value="{{artifact.data.level}}"/>
+                                </label>
+                            {{else}}
+                                <span>Level</span> {{artifact.data.level}}
+                            {{/if}}
+                            </td>
+
+                            <td class="artifact-description">
+                                <p>
+                                    <span><strong>Form:</strong></span> {{artifact.data.form}}
+                                </p>
+                                <p>
+                                    <span><strong>Effect:</strong></span> {{artifact.data.effect}}
+                                </p>
+                            {{#if artifact.data.depletion.isDepleting}}
+                                <p>
+                                    <span><strong>Depletion: </strong></span> {{artifact.data.depletion.threshold}} in
+                                    {{artifact.data.depletion.die}}
+                                    <button class="artifact-depletion-roll">Roll</button>
+                                </p>
+                            {{/if}}
+                            </td>
+                            <td>
+                                <a class="artifact-delete" data-action="delete" title="Delete"><i class="fas fa-trash"></i></a>
+                            </td>
+                        </tbody>
+                    </table>
+                </li>
+                {{else}}
+                No artifacts.
+                {{/each}}
+            </ul>
         </div>
     
         <div class="tab description" data-group="primary" data-tab="bio">

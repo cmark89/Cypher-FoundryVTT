@@ -129,8 +129,7 @@ export class NumeneraPCActorSheet extends ActorSheet {
         "form.numenera table.skills",
         "form.numenera table.weapons",
         "form.numenera ul.artifacts",
-        "form.numenera ul.cyphers",
-        "form.numenera ul.oddities",
+        "form.numenera ul.cyphers"
       ],
       width: 900,
       height: 1000,
@@ -173,7 +172,6 @@ export class NumeneraPCActorSheet extends ActorSheet {
     this.onArtifactDelete = onItemDeleteGenerator("artifact");
     this.onCypherDelete = onItemDeleteGenerator("cypher");
     this.onEquipmentDelete = onItemDeleteGenerator("equipment");
-    this.onOddityDelete = onItemDeleteGenerator("oddity");
     this.onSkillDelete = onItemDeleteGenerator("skill");
     this.onWeaponDelete = onItemDeleteGenerator("weapon");
   }
@@ -258,8 +256,6 @@ export class NumeneraPCActorSheet extends ActorSheet {
       sheetData.data.items.cyphers = items.filter(i => i.type === "cypher").sort(sortFunction);
     if (!sheetData.data.items.equipment)
       sheetData.data.items.equipment = items.filter(i => i.type === "equipment").sort(sortFunction);
-    if (!sheetData.data.items.oddities)
-      sheetData.data.items.oddities = items.filter(i => i.type === "oddity").sort(sortFunction);
     if (!sheetData.data.items.skills)
       sheetData.data.items.skills = items.filter(i => i.type === "skill").sort(sortFunction);
     if (!sheetData.data.items.weapons)
@@ -295,11 +291,6 @@ export class NumeneraPCActorSheet extends ActorSheet {
 
       cypher.showIcon = cypher.img && sheetData.settings.icons.numenera;
       return cypher;
-    });
-
-    sheetData.data.items.oddities = sheetData.data.items.oddities.map(oddity => {
-      oddity.showIcon = oddity.img && sheetData.settings.icons.numenera;
-      return oddity;
     });
 
     sheetData.displayCypherLimitWarning = this.actor.isOverCypherLimit();
@@ -371,8 +362,6 @@ export class NumeneraPCActorSheet extends ActorSheet {
     weaponsTable.on("click", ".weapon-delete", this.onWeaponDelete.bind(this));
     weaponsTable.on("blur", "input,select", this.onWeaponEdit.bind(this));
 
-    html.find("ul.oddities").on("click", ".oddity-delete", this.onOddityDelete.bind(this));
-
     const artifactsList = html.find("ul.artifacts");
     html.find("ul.artifacts").on("click", ".artifact-delete", this.onArtifactDelete.bind(this));
     html.find("ul.artifacts").on("click", ".artifact-depletion-roll", this.onArtifactDepletionRoll.bind(this));
@@ -396,7 +385,6 @@ export class NumeneraPCActorSheet extends ActorSheet {
 
     drakes.push(dragula([document.querySelector("ul.artifacts")], Object.assign({}, dragulaOptions)));
     drakes.push(dragula([document.querySelector("ul.cyphers")], Object.assign({}, dragulaOptions)));
-    drakes.push(dragula([document.querySelector("ul.oddities")], Object.assign({}, dragulaOptions)));
 
     //Handle reordering on all these nice draggable elements
     //Assumes they all have a "order" property: should be the case since it's defined in the template.json
