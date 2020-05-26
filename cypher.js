@@ -9,7 +9,6 @@ import { NumeneraArmorItemSheet } from './module/item/sheets/NumeneraArmorItemSh
 import { NumeneraArtifactItemSheet } from './module/item/sheets/NumeneraArtifactItemSheet.js';
 import { NumeneraCypherItemSheet } from './module/item/sheets/NumeneraCypherItemSheet.js';
 import { NumeneraEquipmentItemSheet } from './module/item/sheets/NumeneraEquipmentItemSheet.js';
-import { NumeneraOddityItemSheet } from './module/item/sheets/NumeneraOddityItemSheet.js';
 import { NumeneraSkillItemSheet } from './module/item/sheets/NumeneraSkillItemSheet.js';
 import { NumeneraWeaponItemSheet } from './module/item/sheets/NumeneraWeaponItemSheet.js';
 
@@ -47,7 +46,6 @@ Hooks.once("init", function() {
     Items.registerSheet("cypher", NumeneraArtifactItemSheet, { types: ["artifact"], makeDefault: true });
     Items.registerSheet("cypher", NumeneraCypherItemSheet, { types: ["cypher"], makeDefault: true });
     Items.registerSheet("cypher", NumeneraEquipmentItemSheet, { types: ["equipment"], makeDefault: true });
-    Items.registerSheet("cypher", NumeneraOddityItemSheet, { types: ["oddity"], makeDefault: true });
     Items.registerSheet("cypher", NumeneraSkillItemSheet, { types: ["skill"], makeDefault: true });
     Items.registerSheet("cypher", NumeneraWeaponItemSheet, { types: ["weapon"], makeDefault: true });
     

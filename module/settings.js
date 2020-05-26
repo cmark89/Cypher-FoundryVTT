@@ -61,7 +61,7 @@ export const registerSystemSettings = function() {
    */
   game.settings.register("cypher", "showNumeneraIcons", {
     name: "Numenera Icons",
-    hint: "Enable to show cypher, artifact, and oddity icons in player character sheets",
+    hint: "Enable to show cypher and artifact icons in player character sheets",
     scope: "world",
     config: true,
     type: Boolean,

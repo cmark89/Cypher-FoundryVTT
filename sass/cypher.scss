@@ -457,7 +457,7 @@ form.numenera {
         width: 42px !important; 
     }
 
-    table.cypher-header-table, table.artifact-header-table, table.oddity-header-table {
+    table.cypher-header-table, table.artifact-header-table {
         background-color: transparent;
         border:none;
         padding-bottom:0px;
@@ -491,11 +491,6 @@ form.numenera {
             text-align: center;
         }
 
-        td.oddity-name {
-            width: 25%;
-            text-align: center;
-        }
-
         td.cypher-level, td.artifact-level {
             width: 25%;
             text-align: center;
@@ -503,11 +498,6 @@ form.numenera {
 
         td.cypher-description, td.artifact-description {
             width: 60%;
-            text-align: left;
-        }
-
-        td.oddity-description {
-            width: 75%;
             text-align: left;
         }
     }

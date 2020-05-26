@@ -21,7 +21,6 @@ const toBundle = [
     "templates/item/artifactSheet.html",
     "templates/item/cypherSheet.html",
     "templates/item/equipmentSheet.html",
-    "templates/item/odditySheet.html",
     "templates/item/skillSheet.html",
     "templates/item/weaponSheet.html",
     "LICENSE"

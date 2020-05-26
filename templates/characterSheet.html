@@ -361,45 +361,6 @@
                 No artifacts.
                 {{/each}}
             </ul>
-
-            <hr class="sheet-one" />
-    
-            <h2>Oddities</h2>
-            <ul class="oddities">
-                {{#each data.items.oddities as |oddity|}}
-                <li class="oddity" data-item-id={{oddity._id}} data-order={{oddity.data.order}}>
-                    <table class="oddity-header-table">
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <h4>
-                                        <a><i class="fas fa-grip-vertical handle"></i></a>
-                                    </h4>
-                                </td>
-                            {{#if oddity.showIcon}}
-                                <td class="oddity-icon">
-                                    <img src="{{oddity.img}}" />
-                                </td>
-                            {{/if}}
-                                <td class="oddity-name">
-                                    <h4><strong>{{oddity.name}}</strong></h4>
-                                </td>
-                                <td class="oddity-description">
-                                    <span>
-                                        {{oddity.data.notes}}
-                                    </span>
-                                </td>
-                                <td>
-                                    <a class="oddity-delete" data-action="delete" title="Delete"><i class="fas fa-trash"></i></a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </li>
-                {{else}}
-                No oddities.
-                {{/each}}
-            </ul>
         </div>
     
         <div class="tab equipment" data-group="primary" data-tab="equipment">

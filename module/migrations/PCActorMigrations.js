@@ -19,33 +19,6 @@ PCActorv1ToV2Migrator.migrationFunction = async function(actor, obj = {}) {
   const newData = Object.assign({ _id: actor._id}, obj);
   
   if (actor.data.data.numenera) {
-    if (actor.data.data.numenera.oddities) {
-      //Create pseudo-objects by splitting the text as different oddities
-      const oddityLines = actor.data.data.numenera.oddities
-        .split(/\r?\n/)
-        .filter(Boolean);
-
-      for (let oddity of oddityLines) { 
-        await actor.createOwnedItem({
-            name: oddity,
-            type: "oddity",
-            data: {
-              description: oddity,
-              version: 2,
-            }
-        });
-
-        await NumeneraItem.create({
-          name: oddity,
-          type: "oddity",
-          data: {
-            description: oddity,
-            version: 2,
-          }
-        });
-      }
-    }
-
     if (actor.data.data.numenera.artifacts) {
       //Create pseudo-objects by splitting the text as different artifacts
       const artifactLines = actor.data.data.numenera.artifacts
