@@ -1,4 +1,4 @@
-import { NUMENERA } from "../../config.js";
+import { CYPHER } from "../../config.js";
 
 export class NumeneraAbilityItemSheet extends ItemSheet {
     /**
@@ -27,8 +27,8 @@ export class NumeneraAbilityItemSheet extends ItemSheet {
     getData() {
         const sheetData = super.getData();
 
-        sheetData.data.ranges = NUMENERA.optionalRanges;
-        sheetData.data.stats = NUMENERA.stats;
+        sheetData.data.ranges = CYPHER.optionalRanges;
+        sheetData.data.stats = CYPHER.stats;
 
         return sheetData;
     }

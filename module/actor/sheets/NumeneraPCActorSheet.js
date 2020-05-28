@@ -1,5 +1,5 @@
 import { confirmDeletion } from "../../apps/ConfirmationDialog.js";
-import { NUMENERA } from "../../config.js";
+import { CYPHER } from "../../config.js";
 import { numeneraRoll } from "../../roll.js";
 import { NumeneraAbilityItem } from "../../item/NumeneraAbilityItem.js";
 import { NumeneraArmorItem } from "../../item/NumeneraArmorItem.js";
@@ -144,7 +144,7 @@ export class NumeneraPCActorSheet extends ActorSheet {
   }
 
   static get advances() {
-    return NUMENERA.advances;
+    return CYPHER.advances;
   }
 
   constructor(...args) {
@@ -206,31 +206,31 @@ export class NumeneraPCActorSheet extends ActorSheet {
     sheetData.settings.icons.equipment = game.settings.get("cypher", "showEquipmentIcons");
 
     //Copy labels to be used as is
-    sheetData.ranges = NUMENERA.ranges;
-    sheetData.stats = NUMENERA.stats;
-    sheetData.weaponTypes = NUMENERA.weaponTypes;
-    sheetData.weights = NUMENERA.weightClasses;
-    sheetData.optionalWeights = NUMENERA.optionalWeightClasses;
+    sheetData.ranges = CYPHER.ranges;
+    sheetData.stats = CYPHER.stats;
+    sheetData.weaponTypes = CYPHER.weaponTypes;
+    sheetData.weights = CYPHER.weightClasses;
+    sheetData.optionalWeights = CYPHER.optionalWeightClasses;
 
     sheetData.advances = Object.entries(sheetData.actor.data.advances).map(
       ([key, value]) => {
         return {
           name: key,
-          label: NUMENERA.advances[key],
+          label: CYPHER.advances[key],
           isChecked: value,
         };
       }
     );
 
-    sheetData.damageTrackData = NUMENERA.damageTrack;
-    sheetData.damageTrackDescription = NUMENERA.damageTrack[sheetData.data.damageTrack].description;
+    sheetData.damageTrackData = CYPHER.damageTrack;
+    sheetData.damageTrackDescription = CYPHER.damageTrack[sheetData.data.damageTrack].description;
 
     sheetData.recoveriesData = Object.entries(
       sheetData.actor.data.recoveries
     ).map(([key, value]) => {
       return {
         key,
-        label: NUMENERA.recoveries[key],
+        label: CYPHER.recoveries[key],
         checked: value,
       };
     });
@@ -288,14 +288,14 @@ export class NumeneraPCActorSheet extends ActorSheet {
     //TODO put ranges, stats, etc. as globally available data for the sheet instead of repeating
     sheetData.data.items.abilities = sheetData.data.items.abilities.map(ability => {
       ability.nocost = (ability.data.cost.amount <= 0);
-      ability.ranges = NUMENERA.optionalRanges;
-      ability.stats = NUMENERA.stats;
+      ability.ranges = CYPHER.optionalRanges;
+      ability.stats = CYPHER.stats;
       ability.showIcon = ability.img && sheetData.settings.icons.abilities;
       return ability;
     });
 
     sheetData.data.items.skills = sheetData.data.items.skills.map(skill => {
-      skill.stats = NUMENERA.stats;
+      skill.stats = CYPHER.stats;
       skill.showIcon = skill.img && sheetData.settings.icons.skills;
       return skill;
     });

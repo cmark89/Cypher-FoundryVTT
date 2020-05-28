@@ -1,4 +1,4 @@
-import { NUMENERA } from "../../config.js";
+import { CYPHER } from "../../config.js";
 
 export class NumeneraArmorItemSheet extends ItemSheet {
     /**
@@ -27,7 +27,7 @@ export class NumeneraArmorItemSheet extends ItemSheet {
     getData() {
         const data = super.getData();
 
-        data.weightClasses = NUMENERA.weightClasses;
+        data.weightClasses = CYPHER.weightClasses;
         
         return data;
     }

@@ -1,4 +1,4 @@
-import { NUMENERA } from "../../config.js";
+import { CYPHER } from "../../config.js";
 
 export class NumeneraCypherItemSheet extends ItemSheet {
     /**

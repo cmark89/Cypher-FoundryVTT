@@ -1,4 +1,4 @@
-import { NUMENERA } from './config.js';
+import { CYPHER } from './config.js';
 
 export function cypherToken() {
     // Here we monkey-patch in a bunch of crap because I can see no better way to have custom token behavior
@@ -166,9 +166,9 @@ function drawCypherBar(number, bar, data) {
 
     // Let's do at least one good thing by making these colors configurable
     let colors = {
-        0: NUMENERA.attributeColors[0],
-        1: NUMENERA.attributeColors[1],
-        2: NUMENERA.attributeColors[2]
+        0: CYPHER.attributeColors[0],
+        1: CYPHER.attributeColors[1],
+        2: CYPHER.attributeColors[2]
     }
     
     let color = colors[number];

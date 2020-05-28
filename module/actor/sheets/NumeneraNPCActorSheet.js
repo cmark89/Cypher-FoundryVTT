@@ -1,4 +1,4 @@
-import { NUMENERA } from "../../config.js";
+import { CYPHER } from "../../config.js";
 
 /**
  * Extend the basic ActorSheet class to do all the Numenera things!
@@ -31,7 +31,7 @@ export class NumeneraNPCActorSheet extends ActorSheet {
   getData() {
     const sheetData = super.getData();
 
-    sheetData.ranges = NUMENERA.ranges;
+    sheetData.ranges = CYPHER.ranges;
 
     return sheetData;
   }

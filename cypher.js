@@ -13,7 +13,7 @@ import { NumeneraSkillItemSheet } from './module/item/sheets/NumeneraSkillItemSh
 import { NumeneraWeaponItemSheet } from './module/item/sheets/NumeneraWeaponItemSheet.js';
 
 
-import { NUMENERA } from './module/config.js';
+import { CYPHER } from './module/config.js';
 import { getInitiativeFormula, rollInitiative } from './module/combat.js';
 import { rollText } from './module/roll.js';
 import { preloadHandlebarsTemplates } from './module/templates.js';
@@ -21,12 +21,15 @@ import { registerSystemSettings } from './module/settings.js';
 import { migrateWorld } from './module/migrations/migrate.js';
 import { numeneraSocketListeners } from './module/socket.js';
 import { cypherToken } from './module/token.js';
+import { HorrorMode } from './module/horrorMode.js';
+import { SPECIAL_ROLL_TYPE } from './module/roll.js';
 
-Hooks.once("init", function() {
+Hooks.once("init", function () {
     console.log('Cypher | Initializing Cypher System');
 
     // Record Configuration Values
-    CONFIG.NUMENERA = NUMENERA;
+    CONFIG.CYPHER = CYPHER;
+    CONFIG.CYPHER.HorrorMode = HorrorMode;
 
     //Dirty trick to instantiate the right class. Kids, do NOT try this at home.
     CONFIG.Actor.entityClass = NumeneraActor;
@@ -49,7 +52,7 @@ Hooks.once("init", function() {
     Items.registerSheet("cypher", NumeneraEquipmentItemSheet, { types: ["equipment"], makeDefault: true });
     Items.registerSheet("cypher", NumeneraSkillItemSheet, { types: ["skill"], makeDefault: true });
     Items.registerSheet("cypher", NumeneraWeaponItemSheet, { types: ["weapon"], makeDefault: true });
-    
+
     registerSystemSettings();
     preloadHandlebarsTemplates();
 });
@@ -57,19 +60,19 @@ Hooks.once("init", function() {
 Hooks.once("init", cypherToken);
 
 //TODO cleanup the functions here, it's gonna get messy real quick
-  
+
 /*
 Display an NPC's difficulty between parentheses in the Actors list
 */
 Hooks.on('renderActorDirectory', (app, html, options) => {
-  const found = html.find(".entity-name");
-  
-  app.entities
-      .filter(actor => actor.data.type === 'npc')
-      .forEach(actor => {
-          found.filter((i, elem) => elem.innerText === actor.data.name)
+    const found = html.find(".entity-name");
+
+    app.entities
+        .filter(actor => actor.data.type === 'npc')
+        .forEach(actor => {
+            found.filter((i, elem) => elem.innerText === actor.data.name)
                 .each((i, elem) => elem.innerText += ` (${actor.data.data.level * 3})`);
-      })
+        })
 });
 
 Hooks.on('renderCompendium', async (app, html, options) => {
@@ -77,13 +80,13 @@ Hooks.on('renderCompendium', async (app, html, options) => {
 
     html.find(".entry-name")
         .each((i, el) => {
-        const actor = npcs.find(npc => el.innerText.indexOf(npc.data.name) !== -1);
-        if (!actor)
-            return;
+            const actor = npcs.find(npc => el.innerText.indexOf(npc.data.name) !== -1);
+            if (!actor)
+                return;
 
-        //Display the NPC's target between parentheses
-        el.innerHTML += ` (${actor.data.data.level * 3})`;
-    });
+            //Display the NPC's target between parentheses
+            el.innerHTML += ` (${actor.data.data.level * 3})`;
+        });
 
 });
 
@@ -95,17 +98,26 @@ Hooks.on("renderChatMessage", (app, html, data) => {
     const isRollTable = app.data.flags && app.data.flags.core && app.data.flags.core.RollTable;
 
     //Don't apply ChatMessage enhancement to recovery rolls or to rollable tables
-    if (roll && roll.dice[0].faces === 20 && !isRollTable)
-    {
+    if (roll && roll.dice[0].faces === 20 && !isRollTable) {
         const special = rollText(roll.total);
         const dt = html.find("h4.dice-total")[0];
 
         //"special" refers to special attributes: minor/major effect or GM intrusion text, special background, etc.
         if (special) {
-            const { text, color } = special;
-            const newContent = `<span class="numenera-message-special" style="color: ${color}">${text}</span>`;
+            let putSpecialText = function (s) {
+                const { text, color } = s;
+                const newContent = `<p><span class="numenera-message-special" style="color: ${color}">${text}</span></p>`;
 
-            $(newContent).insertBefore(dt);
+                $(newContent).insertBefore(dt);
+            };
+
+            // If we're not using horror mode, just spit out the special text as usual
+            if (!HorrorMode.isActive || !Array.isArray(special)) {
+                putSpecialText(special);
+            } else {
+                // Horror mode will always give us back an array here, so do with it as appropriate
+                special.forEach(putSpecialText);
+            }
         }
 
         if (game.settings.get("cypher", "d20Rolling") === "taskLevels") {
@@ -146,10 +158,12 @@ Hooks.on("getActorDirectoryEntryContext", (html, entryOptions) => {
                 })
                 .map(usersPermissions => usersPermissions[0]);
 
-            game.socket.emit("system.cypher", {type: "gmIntrusion", data: {
-                userIds: ownerIds,
-                actorId: actor.data._id,
-            }});
+            game.socket.emit("system.cypher", {
+                type: "gmIntrusion", data: {
+                    userIds: ownerIds,
+                    actorId: actor.data._id,
+                }
+            });
 
             ChatMessage.create({
                 content: `<h2>GM Intrusion</h2><br/>The GM offers an intrusion to ${actor.data.name}`,

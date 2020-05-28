@@ -1,4 +1,4 @@
-import { NUMENERA } from "../../config.js";
+import { CYPHER } from "../../config.js";
 
 export class NumeneraSkillItemSheet extends ItemSheet {
     /**
@@ -27,7 +27,7 @@ export class NumeneraSkillItemSheet extends ItemSheet {
     getData() {
         const sheetData = super.getData();
 
-        sheetData.stats = [""].concat(NUMENERA.stats);
+        sheetData.stats = [""].concat(CYPHER.stats);
 
         return sheetData;
     }
