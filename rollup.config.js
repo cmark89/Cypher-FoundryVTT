@@ -23,6 +23,10 @@ const toBundle = [
     "templates/item/equipmentSheet.html",
     "templates/item/skillSheet.html",
     "templates/item/weaponSheet.html",
+
+    // Graphics for macros need to be specifically listed here
+    "graphics/icons/eye.svg",
+
     "LICENSE"
 ];
 
