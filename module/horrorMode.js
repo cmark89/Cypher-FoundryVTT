@@ -25,4 +25,15 @@ export class HorrorMode {
     static reset() {
         HorrorMode.currentHorrorLevel = 1;
     }
+
+    static broadcastUpdate() {
+        if(game.user.isGM) {
+            game.socket.emit("system.cypher", {
+                type: "horrorLevel", data: {
+                    isActive: this.isActive,
+                    horrorLevel: this.currentHorrorLevel
+                }
+            });
+        }
+    }
 }

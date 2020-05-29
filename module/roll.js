@@ -30,7 +30,6 @@ export function numeneraRoll(level = 0) {
 export function rollText(dieRoll) {
   if (HorrorMode.isActive) {
     let result = [];
-    console.log("HORROR MODE ON");
     if (dieRoll <= HorrorMode.horrorLevel) {
       // Our roll is within the increasing horror level band, so it becomes a GM intrusion even if it's not a 1.
       result.push(SPECIAL_ROLL_TYPE.GM_INTRUSION);
