@@ -1,21 +1,4 @@
 export const registerSystemSettings = function() {
-
-  /**
-   * Configure the Numenera version being used
-   */
-  game.settings.register("cypher", "systemVersion", {
-    name: "Numenera Version",
-    hint: "Select the Numenera version you're using. Version 1 is the original 2013 edition with the orange cover; version 2 is the 2018 split into two books, Discovery and Destiny",
-    scope: "world",
-    config: true,
-    type: Number,
-    default: 2,
-    choices: {
-      1: "Version 1",
-      2: "Version 2",
-    },
-  });
-
   /**
    * Configure d20-rolling options
    */
@@ -30,6 +13,30 @@ export const registerSystemSettings = function() {
       "taskLevels": "Output task level success instead of numbers",
       "straightNumbers": "Output numbers and modifiers as is",
     }
+  });
+
+  /**
+   * Configure cypher short character sheet options
+   */
+  game.settings.register("cypher", "cypherShort", {
+    name: "Use Cypher Short characters",
+    hint: "Enable to use a simplified character sheet without progression fields",
+    scope: "world",
+    config: true,
+    type: Boolean,
+    default: false
+  });
+
+  /**
+   * Configure cypher usage
+   */
+  game.settings.register("cypher", "useCyphers", {
+    name: "Enable Cyphers",
+    hint: "Disable to remove the cypher section from PC character sheets. Only disable if you are certain your game will not use cyphers at all.",
+    scope: "world",
+    config: true,
+    type: Boolean,
+    default: true
   });
   
   /**
@@ -61,7 +68,7 @@ export const registerSystemSettings = function() {
    */
   game.settings.register("cypher", "showNumeneraIcons", {
     name: "Numenera Icons",
-    hint: "Enable to show cypher, artifact, and oddity icons in player character sheets",
+    hint: "Enable to show cypher and artifact icons in player character sheets",
     scope: "world",
     config: true,
     type: Boolean,

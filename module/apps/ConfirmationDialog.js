@@ -17,6 +17,6 @@ export function confirmDeletion(subject) {
       },
       default: "cancel",
       close: () => resolve(false),
-    }, {classes: ["numenera", "dialog"]}).render(true);
+    }, {classes: ["cypher", "dialog"]}).render(true);
   });
 }

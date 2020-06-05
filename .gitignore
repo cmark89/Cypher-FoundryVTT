@@ -4,3 +4,5 @@ dist/
 !lib/**/*.css
 *.zip
 *.code-workspace
+foundry.js
+style.css

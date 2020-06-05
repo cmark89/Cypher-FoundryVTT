@@ -1,4 +1,4 @@
-import { NUMENERA } from "../../config.js";
+import { CYPHER } from "../../config.js";
 
 /**
  * Extend the basic ActorSheet class to do all the Numenera things!
@@ -22,7 +22,7 @@ export class NumeneraNPCActorSheet extends ActorSheet {
    * @type {String}
    */
   get template() {
-    return "systems/numenera/templates/npcSheet.html";
+    return "systems/cypher/templates/npcSheet.html";
   }
 
   /**
@@ -31,7 +31,7 @@ export class NumeneraNPCActorSheet extends ActorSheet {
   getData() {
     const sheetData = super.getData();
 
-    sheetData.ranges = NUMENERA.ranges;
+    sheetData.ranges = CYPHER.ranges;
 
     return sheetData;
   }
@@ -172,5 +172,8 @@ export class NumeneraNPCActorSheet extends ActorSheet {
 
     // Update the Actor
     await this.object.update(formData);
+
+    //In case the NPC level changed, re-render the ActorDirectory
+    ui.actors.render();
   }
 }

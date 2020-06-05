@@ -9,6 +9,13 @@ const effortObject = {
  */
 export class NumeneraPCActor extends Actor {
 
+  prepareData() {
+    super.prepareData();
+
+    //Armor would sometimes get desynchronized with the armor items, this fixes it
+    this.data.data.armor = this.getTotalArmor();
+  }
+
   getInitiativeFormula() {
     //Check for an initiative skill
     const initSkill = 3 * this.getSkillLevel("Initiative");
@@ -38,7 +45,7 @@ export class NumeneraPCActor extends Actor {
 
     //Each stat pool whose value is 0 counts as being one step higher on the damage track
     return Object.values(stats).filter(stat => {
-      return stat.pool.current === 0;
+      return stat.pool.value === 0;
     }).length;
   }
   
@@ -120,6 +127,33 @@ export class NumeneraPCActor extends Actor {
   getTotalArmor() {
     return this.getEmbeddedCollection("OwnedItem").filter(i => i.type === "armor")
       .reduce((acc, armor) => acc + Number(armor.data.armor), 0);
+  }
+
+  async onGMIntrusion(accepted) {
+    let xp = this.data.data.xp;
+    let choiceVerb;
+
+    if (accepted) {
+      xp++;
+      choiceVerb = "accepts";
+    } else {
+      xp--;
+      choiceVerb = "refuses";
+    }
+
+    this.update({
+      _id: this._id,
+      "data.xp": xp,
+    });
+
+    ChatMessage.create({
+      content: `<h2>GM Intrusion</h2><br/>${this.data.name} ${choiceVerb} the intrusion`,
+    });
+  }
+
+  isOverCypherLimit() {
+    const cyphers = this.getEmbeddedCollection("OwnedItem").filter(i => i.type === "cypher");
+    return  this.data.data.cypherLimit < cyphers.length;
   }
 
   /**

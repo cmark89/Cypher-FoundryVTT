@@ -7,9 +7,17 @@
     "scripts": ["lib/dragula/dragula.min.js"],
     "esmodules": ["cypher.js"],
     "styles": ["cypher.css", "lib/dragula/dragula.min.css"],
-    "packs": [],
+    "packs": [
+        {
+          "name": "horrorMode",
+          "label": "Horror Mode",
+          "path": "./packs/horror-mode.db",
+          "entity": "Macro",
+          "system": "cypher"
+        }],
     "languages": ["en"],
-    "compatibleCoreVersion": "0.5.7",
+    "socket": true,
+    "compatibleCoreVersion": "0.6.0",
     "minimumCoreVersion" : "0.5.7",
     "url": "https://github.com/cmark89/Cypher-FoundryVTT",
     "manifest": "https://raw.githubusercontent.com/cmark89/Cypher-FoundryVTT/master/system.json",
