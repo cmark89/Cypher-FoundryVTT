@@ -3,7 +3,6 @@ import { NumeneraArtifactItemSheet } from "./NumeneraArtifactItemSheet.js";
 import { NumeneraArmorItemSheet } from "./NumeneraArmorItemSheet.js";
 import { NumeneraCypherItemSheet } from "./NumeneraCypherItemSheet.js";
 import { NumeneraEquipmentItemSheet } from "./NumeneraEquipmentItemSheet.js";
-import { NumeneraOddityItemSheet } from "./NumeneraOddityItemSheet.js";
 import { NumeneraWeaponItemSheet } from "./NumeneraWeaponItemSheet.js";
 
 export class NumeneraItemSheet extends ItemSheet {
@@ -31,9 +30,6 @@ export class NumeneraItemSheet extends ItemSheet {
                 break;
             case "equipment":
                 object = new NumeneraEquipmentItemSheet(data, options);
-                break;
-            case "oddity":
-                object = new NumeneraOddityItemSheet(data, options);
                 break;
             case "skill":
                 object = new NumeneraSkillItemSheet(data, options);

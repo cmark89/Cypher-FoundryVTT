@@ -19,7 +19,7 @@ export class NumeneraEquipmentItemSheet extends ItemSheet {
      * @type {String}
      */
     get template() {
-        return "systems/numenera/templates/item/equipmentSheet.html";
+        return "systems/cypher/templates/item/equipmentSheet.html";
     }
 
     get type() {

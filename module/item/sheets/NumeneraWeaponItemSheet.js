@@ -1,4 +1,4 @@
-import { NUMENERA } from "../../config.js";
+import { CYPHER } from "../../config.js";
 
 export class NumeneraWeaponItemSheet extends ItemSheet {
     /**
@@ -21,15 +21,15 @@ export class NumeneraWeaponItemSheet extends ItemSheet {
      * @type {String}
      */
     get template() {
-        return "systems/numenera/templates/item/weaponSheet.html";
+        return "systems/cypher/templates/item/weaponSheet.html";
     }
 
     getData() {
         const sheetData = super.getData();
 
-        sheetData.ranges = NUMENERA.ranges;
-        sheetData.weaponTypes = NUMENERA.weaponTypes;
-        sheetData.weights = NUMENERA.weightClasses;
+        sheetData.ranges = CYPHER.ranges;
+        sheetData.weaponTypes = CYPHER.weaponTypes;
+        sheetData.weights = CYPHER.weightClasses;
 
         return sheetData;
     }

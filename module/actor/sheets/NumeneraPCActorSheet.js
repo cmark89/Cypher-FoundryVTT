@@ -1,5 +1,5 @@
 import { confirmDeletion } from "../../apps/ConfirmationDialog.js";
-import { NUMENERA } from "../../config.js";
+import { CYPHER } from "../../config.js";
 import { numeneraRoll } from "../../roll.js";
 import { NumeneraAbilityItem } from "../../item/NumeneraAbilityItem.js";
 import { NumeneraArmorItem } from "../../item/NumeneraArmorItem.js";
@@ -129,8 +129,7 @@ export class NumeneraPCActorSheet extends ActorSheet {
         "form.numenera table.skills",
         "form.numenera table.weapons",
         "form.numenera ul.artifacts",
-        "form.numenera ul.cyphers",
-        "form.numenera ul.oddities",
+        "form.numenera ul.cyphers"
       ],
       width: 900,
       height: 1000,
@@ -145,7 +144,7 @@ export class NumeneraPCActorSheet extends ActorSheet {
   }
 
   static get advances() {
-    return NUMENERA.advances;
+    return CYPHER.advances;
   }
 
   constructor(...args) {
@@ -173,7 +172,6 @@ export class NumeneraPCActorSheet extends ActorSheet {
     this.onArtifactDelete = onItemDeleteGenerator("artifact");
     this.onCypherDelete = onItemDeleteGenerator("cypher");
     this.onEquipmentDelete = onItemDeleteGenerator("equipment");
-    this.onOddityDelete = onItemDeleteGenerator("oddity");
     this.onSkillDelete = onItemDeleteGenerator("skill");
     this.onWeaponDelete = onItemDeleteGenerator("weapon");
   }
@@ -197,49 +195,44 @@ export class NumeneraPCActorSheet extends ActorSheet {
   getData() {
     const sheetData = super.getData();
 
-    const useCypherTypes = (game.settings.get("cypher", "systemVersion") === 1);
-    sheetData.displayCypherType = useCypherTypes;
-	
-	// Add relevant data from system settings
-	sheetData.settings = { 
-		icons: {} 
-  };
-  
-	sheetData.settings.icons.abilities = game.settings.get("cypher", "showAbilityIcons");
-	sheetData.settings.icons.skills = game.settings.get("cypher", "showSkillIcons");
-	sheetData.settings.icons.numenera = game.settings.get("cypher", "showNumeneraIcons");
-	sheetData.settings.icons.equipment = game.settings.get("cypher", "showEquipmentIcons");
+    // Add relevant data from system settings
+    sheetData.settings = {
+      icons: {}
+    };
 
+    sheetData.settings.icons.abilities = game.settings.get("cypher", "showAbilityIcons");
+    sheetData.settings.icons.skills = game.settings.get("cypher", "showSkillIcons");
+    sheetData.settings.icons.numenera = game.settings.get("cypher", "showNumeneraIcons");
+    sheetData.settings.icons.equipment = game.settings.get("cypher", "showEquipmentIcons");
+    sheetData.settings.cypherShort = game.settings.get("cypher", "cypherShort");
+    sheetData.settings.useCyphers = game.settings.get("cypher", "useCyphers");
 
     //Copy labels to be used as is
-    sheetData.ranges = NUMENERA.ranges;
-    sheetData.stats = NUMENERA.stats;
-    sheetData.weaponTypes = NUMENERA.weaponTypes;
-    sheetData.weights = NUMENERA.weightClasses;
-    sheetData.optionalWeights = NUMENERA.optionalWeightClasses;
-
-    if (useCypherTypes)
-      sheetData.cypherTypes = NUMENERA.cypherTypes;
+    sheetData.ranges = CYPHER.ranges;
+    sheetData.stats = CYPHER.stats;
+    sheetData.weaponTypes = CYPHER.weaponTypes;
+    sheetData.weights = CYPHER.weightClasses;
+    sheetData.optionalWeights = CYPHER.optionalWeightClasses;
 
     sheetData.advances = Object.entries(sheetData.actor.data.advances).map(
       ([key, value]) => {
         return {
           name: key,
-          label: NUMENERA.advances[key],
+          label: CYPHER.advances[key],
           isChecked: value,
         };
       }
     );
 
-    sheetData.damageTrackData = NUMENERA.damageTrack;
-    sheetData.damageTrackDescription = NUMENERA.damageTrack[sheetData.data.damageTrack].description;
+    sheetData.damageTrackData = CYPHER.damageTrack;
+    sheetData.damageTrackDescription = CYPHER.damageTrack[sheetData.data.damageTrack].description;
 
     sheetData.recoveriesData = Object.entries(
       sheetData.actor.data.recoveries
     ).map(([key, value]) => {
       return {
         key,
-        label: NUMENERA.recoveries[key],
+        label: CYPHER.recoveries[key],
         checked: value,
       };
     });
@@ -259,8 +252,6 @@ export class NumeneraPCActorSheet extends ActorSheet {
       sheetData.data.items.cyphers = items.filter(i => i.type === "cypher").sort(sortFunction);
     if (!sheetData.data.items.equipment)
       sheetData.data.items.equipment = items.filter(i => i.type === "equipment").sort(sortFunction);
-    if (!sheetData.data.items.oddities)
-      sheetData.data.items.oddities = items.filter(i => i.type === "oddity").sort(sortFunction);
     if (!sheetData.data.items.skills)
       sheetData.data.items.skills = items.filter(i => i.type === "skill").sort(sortFunction);
     if (!sheetData.data.items.weapons)
@@ -288,44 +279,38 @@ export class NumeneraPCActorSheet extends ActorSheet {
         cypher.name = "Unidentified Cypher";
         cypher.data.level = "Unknown";
         cypher.data.effect = "Unknown";
-
-        if (useCypherTypes) {
-          cypher.data.cypherType = "Unknown";
-        }
       }
-	    cypher.showIcon = cypher.img && sheetData.settings.icons.numenera;
+
+      cypher.showIcon = cypher.img && sheetData.settings.icons.numenera;
       return cypher;
     });
 
-    sheetData.data.items.oddities = sheetData.data.items.oddities.map(oddity => {
-	    oddity.showIcon = oddity.img && sheetData.settings.icons.numenera;
-      return oddity;
-    });
+    sheetData.displayCypherLimitWarning = this.actor.isOverCypherLimit();
 
     //TODO put ranges, stats, etc. as globally available data for the sheet instead of repeating
     sheetData.data.items.abilities = sheetData.data.items.abilities.map(ability => {
       ability.nocost = (ability.data.cost.amount <= 0);
-      ability.ranges = NUMENERA.optionalRanges;
-      ability.stats = NUMENERA.stats;
-	    ability.showIcon = ability.img && sheetData.settings.icons.abilities;
+      ability.ranges = CYPHER.optionalRanges;
+      ability.stats = CYPHER.stats;
+      ability.showIcon = ability.img && sheetData.settings.icons.abilities;
       return ability;
     });
 
     sheetData.data.items.skills = sheetData.data.items.skills.map(skill => {
-      skill.stats = NUMENERA.stats;
-	    skill.showIcon = skill.img && sheetData.settings.icons.skills;
+      skill.stats = CYPHER.stats;
+      skill.showIcon = skill.img && sheetData.settings.icons.skills;
       return skill;
     });
-	
-	sheetData.data.items.weapons = sheetData.data.items.weapons.map(weapon => {
+
+    sheetData.data.items.weapons = sheetData.data.items.weapons.map(weapon => {
       weapon.showIcon = weapon.img && sheetData.settings.icons.equipment;
       return weapon;
     });
-	sheetData.data.items.armor = sheetData.data.items.armor.map(armor => {
+    sheetData.data.items.armor = sheetData.data.items.armor.map(armor => {
       armor.showIcon = armor.img && sheetData.settings.icons.equipment;
       return armor;
     });
-	sheetData.data.items.equipment = sheetData.data.items.equipment.map(equipment => {
+    sheetData.data.items.equipment = sheetData.data.items.equipment.map(equipment => {
       equipment.showIcon = equipment.img && sheetData.settings.icons.equipment;
       return equipment;
     });
@@ -369,8 +354,6 @@ export class NumeneraPCActorSheet extends ActorSheet {
     weaponsTable.on("click", ".weapon-delete", this.onWeaponDelete.bind(this));
     weaponsTable.on("blur", "input,select", this.onWeaponEdit.bind(this));
 
-    html.find("ul.oddities").on("click", ".oddity-delete", this.onOddityDelete.bind(this));
-
     const artifactsList = html.find("ul.artifacts");
     html.find("ul.artifacts").on("click", ".artifact-delete", this.onArtifactDelete.bind(this));
     html.find("ul.artifacts").on("click", ".artifact-depletion-roll", this.onArtifactDepletionRoll.bind(this));
@@ -394,7 +377,6 @@ export class NumeneraPCActorSheet extends ActorSheet {
 
     drakes.push(dragula([document.querySelector("ul.artifacts")], Object.assign({}, dragulaOptions)));
     drakes.push(dragula([document.querySelector("ul.cyphers")], Object.assign({}, dragulaOptions)));
-    drakes.push(dragula([document.querySelector("ul.oddities")], Object.assign({}, dragulaOptions)));
 
     //Handle reordering on all these nice draggable elements
     //Assumes they all have a "order" property: should be the case since it's defined in the template.json
@@ -448,7 +430,6 @@ export class NumeneraPCActorSheet extends ActorSheet {
       return;
 
     const roll = new Roll(depletion.die).roll();
-    const depleted = (roll.total <= depletion.threshold);
 
     roll.toMessage({
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
@@ -456,12 +437,13 @@ export class NumeneraPCActorSheet extends ActorSheet {
     });
   }
 
-  onArmorUpdated(armor) {
-      const newTotal = this.actor.getTotalArmor();
+  async onArmorUpdated() {
+    const newTotal = this.actor.getTotalArmor();
 
-      if (newTotal !== this.actor.data.armor) {
-        this.actor.update({"data.armor": newTotal});
-      }
+    if (newTotal !== this.actor.data.armor) {
+      await this.actor.update({"data.armor": newTotal});
+      this.render();
+    }
   }
 
   /*
@@ -475,5 +457,12 @@ export class NumeneraPCActorSheet extends ActorSheet {
     }
     
     super._onChangeInput(event);
+  }
+
+  _onDrop(event) {
+    super._onDrop(event);
+    
+    //Necessary because dropping a new armor from the directory would not update the Armor field
+    this.onArmorUpdated();
   }
 }

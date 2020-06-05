@@ -3,7 +3,6 @@ import { NumeneraArtifactItem } from "./NumeneraArtifactItem.js";
 import { NumeneraArmorItem } from "./NumeneraArmorItem.js";
 import { NumeneraCypherItem } from "./NumeneraCypherItem.js";
 import { NumeneraEquipmentItem } from "./NumeneraEquipmentItem.js";
-import { NumeneraOddityItem } from "./NumeneraOddityItem.js";
 import { NumeneraSkillItem } from "./NumeneraSkillItem.js";
 import { NumeneraWeaponItem } from "./NumeneraWeaponItem.js";
 
@@ -36,8 +35,6 @@ export const NumeneraItem = new Proxy(function () {}, {
         return new NumeneraCypherItem(...args);
       case "equipment":
         return new NumeneraEquipmentItem(...args);
-      case "oddity":
-        return new NumeneraOddityItem(...args);
       case "skill":
         return new NumeneraSkillItem(...args);
       case "weapon":
@@ -61,8 +58,6 @@ export const NumeneraItem = new Proxy(function () {}, {
               return NumeneraCypherItem.create(data, options);
             case "equipment":
               return NumeneraEquipmentItem.create(data, options);
-            case "oddity":
-              return NumeneraOddityItem.create(data, options);
             case "skill":
               return NumeneraSkillItem.create(data, options);
             case "weapon":
@@ -79,7 +74,6 @@ export const NumeneraItem = new Proxy(function () {}, {
             instance instanceof NumeneraArtifactItem ||
             instance instanceof NumeneraCypherItem ||
             instance instanceof NumeneraEquipmentItem ||
-            instance instanceof NumeneraOddityItem ||
             instance instanceof NumeneraSkillItem ||
             instance instanceof NumeneraWeaponItem
           );

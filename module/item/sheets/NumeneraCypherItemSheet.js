@@ -1,4 +1,4 @@
-import { NUMENERA } from "../../config.js";
+import { CYPHER } from "../../config.js";
 
 export class NumeneraCypherItemSheet extends ItemSheet {
     /**
@@ -21,7 +21,7 @@ export class NumeneraCypherItemSheet extends ItemSheet {
      * @type {String}
      */
     get template() {
-        return "systems/numenera/templates/item/cypherSheet.html";
+        return "systems/cypher/templates/item/cypherSheet.html";
     }
 
     get type() {
@@ -30,13 +30,6 @@ export class NumeneraCypherItemSheet extends ItemSheet {
 
     getData() {
         const sheetData = super.getData();
-
-        const useCypherTypes = (game.settings.get("cypher", "systemVersion") === 1);
-        sheetData.useCypherTypes = useCypherTypes;
-
-        if (useCypherTypes) {
-            sheetData.cypherTypes = NUMENERA.cypherTypes;
-        }
 
         return sheetData;
     }

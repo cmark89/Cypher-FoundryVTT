@@ -1,33 +1,33 @@
-export const NUMENERA = {};
+export const CYPHER = {};
 
-NUMENERA.weightClasses = [
+CYPHER.weightClasses = [
   'Light',
   'Medium',
   'Heavy'
 ];
 
-NUMENERA.optionalWeightClasses = ["N/A"].concat(NUMENERA.weightClasses);
+CYPHER.optionalWeightClasses = ["N/A"].concat(CYPHER.weightClasses);
 
-NUMENERA.weaponTypes = [
+CYPHER.weaponTypes = [
   'Bashing',
   'Bladed',
   'Ranged',
 ];
 
-NUMENERA.stats = [
+CYPHER.stats = [
   'Might',
   'Speed',
   'Intellect',
 ];
 
-NUMENERA.skillLevels = {
+CYPHER.skillLevels = {
   'i': 'Inability',
   'u': 'Untrained',
   't': 'Trained',
   's': 'Specialized'
 };
 
-NUMENERA.types = [
+CYPHER.types = [
   {
     abbrev: 'a',
     name: 'Arkus',
@@ -54,7 +54,7 @@ NUMENERA.types = [
   },
 ];
 
-NUMENERA.typePowers = {
+CYPHER.typePowers = {
   'g': 'Combat Maneuvers',
   'j': 'Tricks of the Trade',
   'n': 'Esoteries',
@@ -63,7 +63,7 @@ NUMENERA.typePowers = {
   'w': 'Inspired Techniques',
 };
 
-NUMENERA.damageTrack = [
+CYPHER.damageTrack = [
   {
     label: 'Hale',
     description: 'Normal state for a character.'
@@ -82,14 +82,14 @@ NUMENERA.damageTrack = [
   }
 ];
 
-NUMENERA.recoveries = {
+CYPHER.recoveries = {
   'action': '1 Action',
   'tenMin': '10 min',
   'oneHour': '1 hour',
   'tenHours': '10 hours'
 };
 
-NUMENERA.advances = {
+CYPHER.advances = {
   'statPools': '+4 to stat pools',
   'effort': '+1 to Effort',
   'edge': '+1 to Edge',
@@ -97,21 +97,28 @@ NUMENERA.advances = {
   'other': 'Other',
 };
 
-NUMENERA.ranges = [
+CYPHER.ranges = [
   'Immediate',
   'Short',
   'Long',
   'Very Long'
 ];
 
-NUMENERA.optionalRanges = ["N/A"].concat(NUMENERA.ranges);
+CYPHER.optionalRanges = ["N/A"].concat(CYPHER.ranges);
 
-NUMENERA.abilityTypes = [
+CYPHER.abilityTypes = [
   'Action',
   'Enabler',
 ];
 
-NUMENERA.cypherTypes = [
+CYPHER.cypherTypes = [
   "Anoetic",
   "Occultic",
 ];
+
+// Note that these colors do not get propagated to the CSS; that would be neat, though
+CYPHER.attributeColors = {
+  0: 0xff443d,    // Might
+  1: 0x87ff3d,    // Speed
+  2: 0x3ddbff     // Intellect
+};
