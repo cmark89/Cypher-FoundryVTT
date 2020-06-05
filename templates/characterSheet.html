@@ -28,8 +28,11 @@
                 </div>
                 <div class="flexrow">
                     <div class="stats">
-                        <h2>Tier <input type="text" name="data.tier" value="{{data.tier}}" placeholder="1" min="1" max="6" data-dtype="Number" class="tier" />
-                            Effort <input type="text" name="data.effort" value="{{data.effort}}" placeholder="1" min="1" data-dtype="Number" class="tier" />
+                        <h2>
+                        {{#unless settings.cypherShort}}
+                        Tier <input type="text" name="data.tier" value="{{data.tier}}" placeholder="1" min="1" max="6" data-dtype="Number" class="tier" />
+                        {{/unless}}
+                        Effort <input type="text" name="data.effort" value="{{data.effort}}" placeholder="1" min="1" data-dtype="Number" class="tier" />
                         </h2>
                         <h2>Damage track</h2>
                         <p>
@@ -44,6 +47,7 @@
                         <p class="description">{{damageTrackDescription}}</p>
                     </div>
                     <div class="stats advances">
+                        {{#unless settings.cypherShort}}
                         <h2>Advancement</h2>
                         <h3>
                             <input type="text" name="data.xp" value="{{data.xp}}" placeholder="0" min="0" data-dtype="Number" /> XP
@@ -56,11 +60,21 @@
                             </li>
                             {{/each}}
                         </ul>
+                        {{else}}
+                        <h2>XP</h2>
+                        <h3>
+                            <input type="text" name="data.xp" value="{{data.xp}}" placeholder="0" min="0" data-dtype="Number" />
+                        </h3>
+                        {{/unless}}
                     </div>
                     <div class="stats recovery">
                         <h2>Recovery</h2>
                         <h3>
+                            {{#unless settings.cypherShort}}
                             1d6 + <input type="text" value="{{data.tier}}" data-dtype="Number" disabled="disabled" />
+                            {{else}}    
+                            1d6 + <input type="text" value="1" data-dtype="Number" disabled="disabled" />                        
+                            {{/unless}}
                         </h3>
         
                         <ul>
@@ -84,7 +98,9 @@
         <a class="item" data-tab="skills">Skills</a>
         <a class="item" data-tab="abilities">Abilities</a>
         <a class="item" data-tab="equipment">Inventory</a>
+        {{#if settings.useCyphers}}
         <a class="item" data-tab="numenera">Cyphers</a>
+        {{/if}}
         <a class="item" data-tab="bio">Bio</a>
     </nav>
 

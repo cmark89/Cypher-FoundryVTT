@@ -14,6 +14,30 @@ export const registerSystemSettings = function() {
       "straightNumbers": "Output numbers and modifiers as is",
     }
   });
+
+  /**
+   * Configure cypher short character sheet options
+   */
+  game.settings.register("cypher", "cypherShort", {
+    name: "Use Cypher Short characters",
+    hint: "Enable to use a simplified character sheet without progression fields",
+    scope: "world",
+    config: true,
+    type: Boolean,
+    default: false
+  });
+
+  /**
+   * Configure cypher usage
+   */
+  game.settings.register("cypher", "useCyphers", {
+    name: "Enable Cyphers",
+    hint: "Disable to remove the cypher section from PC character sheets. Only disable if you are certain your game will not use cyphers at all.",
+    scope: "world",
+    config: true,
+    type: Boolean,
+    default: true
+  });
   
   /**
    * Configure whether or not to show skill icons
