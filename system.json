@@ -2,7 +2,7 @@
     "name": "cypher",
     "title": "Cypher",
     "description": "A fork of SolarBear's Numenera system for use with non-specific Cypher System games.",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "author": "cmark89",
     "scripts": ["lib/dragula/dragula.min.js"],
     "esmodules": ["cypher.js"],
@@ -13,5 +13,5 @@
     "minimumCoreVersion" : "0.5.7",
     "url": "https://github.com/cmark89/Cypher-FoundryVTT",
     "manifest": "https://raw.githubusercontent.com/cmark89/Cypher-FoundryVTT/master/system.json",
-    "download": "https://github.com/cmark89/Cypher-FoundryVTT/archive/0.1.0.zip"
+    "download": "https://github.com/cmark89/Cypher-FoundryVTT/archive/0.2.0.zip"
 }
