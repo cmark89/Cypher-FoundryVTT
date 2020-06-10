@@ -1,4 +1,19 @@
 export class NumeneraNPCActor extends Actor {
+  static defaultInfo() {
+    return `<h2>${game.i18n.localize("CYPHER.npc.motive")}</h2><p>...</p>
+    <h2>${game.i18n.localize("CYPHER.npc.combat")}</h2><p>...</p>
+    <h2>${game.i18n.localize("CYPHER.npc.interaction")}</h2><p>...</p>
+    <h2>${game.i18n.localize("CYPHER.npc.use")}</h2><p>...</p>
+    <h2>${game.i18n.localize("CYPHER.npc.loot")}</h2><p>...</p>
+    <h2>${game.i18n.localize("CYPHER.npc.gmIntrusion")}</h2><p>...</p>`;
+  }
+
+  constructor(...args) {
+    super(...args);
+
+    this.data.data.info = this.data.data.info || NumeneraNPCActor.defaultInfo();
+  }
+
   getInitiativeFormula() {   
     /* TODO: improve this
     The init system expects a formula for initiative: fixed values don't seem to work.

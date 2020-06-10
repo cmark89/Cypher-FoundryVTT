@@ -3,8 +3,23 @@
     src: url("/fonts/ogirema.ttf") format("ttf");
 }
 
+$foundry-border-color: #782e22;
 $border-color: #325d6d;
 $font-stack: Ogirema;
+
+@mixin editor($class, $height, $id) {
+    div.#{$class}  {
+        height: #{$height};
+        
+        .editor {
+            height: 100%;
+        }
+
+        button#save-#{$id} {
+            width: 99%;
+        }
+    }
+}
 
 span.numenera-message-special {
     font-weight: bold;
@@ -12,8 +27,17 @@ span.numenera-message-special {
 }
 
 form.numenera {
-    overflow: scroll;
+    height: 100%;
     font-family: $font-stack;
+    
+    button#recoveryRoll {
+        width: 75%;
+
+        h2 {
+            font-family: $font-stack;
+            margin: 0;
+        }
+    }
 
     a i.handle {
         cursor: move;
@@ -142,14 +166,35 @@ form.numenera {
         div > div.npc-info {
             flex: 0.25;
 
-            input.levelDie {
-                width: 2ch;
-                align-content: center;
+            h1 {
+                margin-left: 0.5em;
+                margin-right: 0.5em;
+
+                input.charname {
+                    width: 70%;
+                }
+
+                input.level {
+                    width: 3em;
+                    align-content: center;
+                }
             }
         }
 
         div > div.npc-stats {
-            flex: 0.5;
+            flex: 0.15;
+            padding: 1em;
+            text-align: center;
+
+            label {
+                padding-top: 2px;
+                font-size: 16px;
+                font-weight: bold;
+            }
+
+            input {
+                width: 2ch;
+            }
         }
 
         ul {
@@ -239,6 +284,10 @@ form.numenera {
             }
         }
 
+        h3.shins > input[data-dtype="Number"] {
+            width: 5em;
+        }
+
         table {
             td {
                 padding: 5px;
@@ -276,11 +325,15 @@ form.numenera {
 
             &.equipment {
                 input.equipment-name-input {
-                    width: auto;
+                    width: 100%;
                 }
     
                 input.equipment-quantity {
                     width: 3em;
+                }
+
+                input.equipment-notes {
+                    width: 100%;
                 }
             }
 
@@ -326,15 +379,22 @@ form.numenera {
         border-bottom: 1px solid $border-color;
     }
 
-    div.description  {
-        height: 425px;
-        
-        .editor {
-            height: 100%;
-        }
+    //TinyMCE editors
+    @include editor("description", 425px, "bio");
 
-        button#save-bio {
-            width: 99%;
+    $totalDescriptionHeight: 285px;
+    $buttonHeight: 34px;
+    $descriptionHeight: $totalDescriptionHeight - $buttonHeight;
+
+    @include editor("npc-description", $descriptionHeight, "npc-description");
+    @include editor("npc-info", $descriptionHeight, "npc-info");
+
+    div.npc-modifications {
+        display: flex;
+        flex-direction: column;
+
+        textarea {
+            flex: 1;
         }
     }
 
@@ -388,6 +448,10 @@ form.numenera {
         margin: 0.5em 0 0.5em 0;
         border: 1px solid black;
         border-radius: 8px;
+
+        &.sheet-tabs {
+            flex: 0;
+        }
     }
 
     a.item {
@@ -501,6 +565,115 @@ form.numenera {
         td.cypher-description, td.artifact-description {
             width: 60%;
             text-align: left;
+        }
+    }
+}
+
+#token-hud {
+    #innerTokenHud {
+       height: 100%;
+    }
+
+    #cypherTokenStats {
+        margin: 0px;
+        padding: 0px;
+        position: absolute;
+        width: 300%;
+        top: -85px;
+        left: -100%;
+
+        div {
+            display: inline-block;
+        }
+
+        .attribute {
+            padding: 0px;
+            margin: 0px;
+            width: 30%;
+        }
+        .attribute.bar1 input {
+            border: 2px solid #ff443d !important;
+        }
+        .attribute.bar2 input {
+            border: 2px solid #87ff3d !important;
+        }
+        .attribute.bar3 input {
+            border: 2px solid #3ddbff !important;
+        }
+    }
+}
+
+form.numenera-recovery {
+    font-family: $font-stack;
+
+    h1 {
+        padding-bottom: 0.25em;
+        margin-bottom: 0;
+
+        button {
+            font-weight: bold;
+            font-size: 18px;
+            float: right;
+            width: 8em;
+        }
+    }
+
+    h2 {
+        font-weight: bold;
+        margin-top: 0.5em;
+        border: 0;
+    }
+
+    & > div.columns {
+
+        li {
+            list-style-type: none;
+        }
+
+        & > div {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+
+            &:first-child {
+                border-right: 2px solid $foundry-border-color;
+            }
+
+            &.disabled {
+                color: lightslategray;
+            }
+
+            button {
+                margin-top: 1em;
+                justify-self: flex-end;
+                width: 60%;
+            }
+
+            &.recoveries {
+                p {
+                    font-size: 16px;
+                    font-weight: bold;
+                }
+            }
+
+            &.pools {
+                input[type="number"].pool {
+                    width: 3em;
+                }
+
+                label {
+                    font-size: 16px;
+                    font-weight: bold;
+                    text-transform: capitalize;
+                    margin-right: 0.4em;
+                }
+
+                div.stats {
+                    display: block;
+                    margin-top: 0.5em;
+                }
+            }
         }
     }
 }

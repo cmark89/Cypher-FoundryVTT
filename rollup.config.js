@@ -12,10 +12,14 @@ const toBundle = [
     'cypher.css',
     "fonts/ogirema.ttf",
     "fonts/source.txt",
+    "lang/en.json",
+    "lang/fr.json",
     "lib/dragula/dragula.min.css",
     "lib/dragula/dragula.min.js",
-    "templates/characterSheet.html",
-    "templates/npcSheet.html",
+    "templates/actor/characterSheet.html",
+    "templates/actor/npcSheet.html",
+    "templates/dialog/recovery.html",
+    "templates/hud/tokenHUD.html",
     "templates/item/abilitySheet.html",
     "templates/item/armorSheet.html",
     "templates/item/artifactSheet.html",
@@ -24,10 +28,11 @@ const toBundle = [
     "templates/item/skillSheet.html",
     "templates/item/weaponSheet.html",
 
-    // Graphics for macros need to be specifically listed here
-    "graphics/icons/eye.svg",
+    "templates/scene/tokenConfig.html",
+    "LICENSE",
 
-    "LICENSE"
+    // Graphics for macros need to be specifically listed here
+    "graphics/icons/eye.svg"
 ];
 
 export default [{

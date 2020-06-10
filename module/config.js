@@ -1,56 +1,68 @@
 export const CYPHER = {};
 
-CYPHER.weightClasses = [
-  'Light',
-  'Medium',
-  'Heavy'
-];
+CYPHER.weightClasses = {
+  "Light": "CYPHER.weightClasses.Light",
+  "Medium": "CYPHER.weightClasses.Medium",
+  "Heavy": "CYPHER.weightClasses.Heavy",
+};
 
-CYPHER.optionalWeightClasses = ["N/A"].concat(CYPHER.weightClasses);
+CYPHER.optionalWeightClasses = Object.assign({"N/A": "CYPHER.N/A"}, CYPHER.weightClasses);
 
-CYPHER.weaponTypes = [
-  'Bashing',
-  'Bladed',
-  'Ranged',
-];
+CYPHER.weaponTypes = {
+  "Bashing": "CYPHER.weaponTypes.Bashing",
+  "Bladed": "CYPHER.weaponTypes.Bladed",
+  "Ranged": "CYPHER.weaponTypes.Ranged",
+};
 
-CYPHER.stats = [
-  'Might',
-  'Speed',
-  'Intellect',
-];
+CYPHER.stats = {
+  "might": "CYPHER.stats.might",
+  "speed": "CYPHER.stats.speed",
+  "intellect" : "CYPHER.stats.intellect",
+};
 
 CYPHER.skillLevels = {
-  'i': 'Inability',
-  'u': 'Untrained',
-  't': 'Trained',
-  's': 'Specialized'
+  "i": "CYPHER.skillLevels.Inability",
+  "u": "CYPHER.skillLevels.Untrained",
+  "t": "CYPHER.skillLevels.Trained",
+  "s": "CYPHER.skillLevels.Specialized"
 };
 
 CYPHER.types = [
   {
-    abbrev: 'a',
-    name: 'Arkus',
+    abbrev: "a",
+    name: "Arkus",
   },
   {
-    abbrev: 'd',
-    name: 'Delve',
+    abbrev: "d",
+    name: "Delve",
   },
   {
-    abbrev: 'g',
-    name: 'Glaive',
+    abbrev: "g",
+    name: "Glaive",
   },
   {
-    abbrev: 'j',
-    name: 'Jack',
+    abbrev: "j",
+    name: "Jack",
   },
   {
-    abbrev: 'n',
-    name: 'Nano',
+    abbrev: "n",
+    name: "Nano",
   },
   {
-    abbrev: 'w',
-    name: 'Wright',
+    abbrev: "w",
+    name: "Wright",
+  },
+  {
+    abbrev: 'p',
+    name: 'Paradox',
+  },
+  {
+    abbrev: 's',
+    name: 'Spinner',
+  },
+  {
+    abbrev: 'v',
+    name: 'Vector',
   },
 ];
 
@@ -61,24 +73,27 @@ CYPHER.typePowers = {
   'a': 'Precepts',
   'd': 'Delve Lores',
   'w': 'Inspired Techniques',
+  'v': 'Moves',
+  'p': 'Revisions',
+  's': 'Twists',
 };
 
 CYPHER.damageTrack = [
   {
-    label: 'Hale',
-    description: 'Normal state for a character.'
+    label: "CYPHER.pc.damageTrack.hale.label",
+    description: "CYPHER.pc.damageTrack.hale.description",
   },
   {
-    label: 'Impaired',
-    description: 'In a wounded or injured state. Applying Effort costs 1 extra point per effort level applied.'
+    label: "CYPHER.pc.damageTrack.impaired.label",
+    description: "CYPHER.pc.damageTrack.impaired.description",
   },
   {
-    label: 'Debilitated',
-    description: 'In a critically injured state. The character can do no other action than to crawl an immediate distance; if their Speed pool is 0, they cannot move at all.'
+    label: "CYPHER.pc.damageTrack.debilitated.label",
+    description: "CYPHER.pc.damageTrack.debilitated.description",
   },
   {
-    label: 'Dead',
-    description: 'The character is dead.'
+    label: "CYPHER.pc.damageTrack.dead.label",
+    description: "CYPHER.pc.damageTrack.dead.description",
   }
 ];
 
@@ -107,13 +122,13 @@ CYPHER.ranges = [
 CYPHER.optionalRanges = ["N/A"].concat(CYPHER.ranges);
 
 CYPHER.abilityTypes = [
-  'Action',
-  'Enabler',
+  "CYPHER.item.ability.type.action",
+  "CYPHER.item.ability.type.enabler",
 ];
 
 CYPHER.cypherTypes = [
-  "Anoetic",
-  "Occultic",
+  "CYPHER.pc.numenera.cypher.type.anoetic",
+  "CYPHER.pc.numenera.cypher.type.occultic",
 ];
 
 // Note that these colors do not get propagated to the CSS; that would be neat, though

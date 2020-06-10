@@ -1,0 +1,12 @@
+<form class="{{cssClass}} numenera" autocomplete="off">
+    <h1><input type="text" name="name" value="{{item.name}}" /></h1>
+    <div class="flexrow item">
+        <div class="img">
+            <img class="profile-img" src="{{item.img}}" title="{{item.name}}" data-edit="img" />
+        </div>
+        <div class="description">
+            <label for="data.notes">{{localize "CYPHER.item.oddity.description"}}</label>
+            <textarea id="data.notes" name="data.notes">{{data.notes}}</textarea>
+        </div>
+    </div>
+</form>
