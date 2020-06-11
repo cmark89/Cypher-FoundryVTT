@@ -8,7 +8,6 @@ import { NumeneraSkillItem } from "../../item/NumeneraSkillItem.js";
 import { NumeneraWeaponItem } from "../../item/NumeneraWeaponItem.js";
 
 import  "../../../lib/dragula/dragula.js";
-import { RecoveryDialog } from "../../apps/RecoveryDialog.js";
 
 //Common Dragula options
 const dragulaOptions = {
@@ -382,8 +381,6 @@ export class NumeneraPCActorSheet extends ActorSheet {
       cyphersList.on("blur", "input,select", this.onCypherEdit.bind(this));
     }
 
-    html.find("#recoveryRoll").on("click", this.onRecoveryRoll.bind(this));
-
     //Make sure to make a copy of the options object, otherwise only the first call
     //to Dragula seems to work
     const drakes = [];
@@ -545,11 +542,6 @@ export class NumeneraPCActorSheet extends ActorSheet {
       this.actor.data.items.find(i => i._id === skill.data.relatedAbilityId)
     )
       ui.notifications.warn(game.i18n.localize("CYPHER.warnings.abilityWithSameNameExists"));
-  }
-
-  onRecoveryRoll(event) {
-    event.preventDefault();
-    new RecoveryDialog(this.actor).render(true);
   }
 
   /*

@@ -68,18 +68,23 @@
                         {{/unless}}
                     </div>
                     <div class="stats recovery">
-                        <button id="recoveryRoll">
-                            <h2>{{localize "CYPHER.pc.recovery.name"}}</h2>
-                        </button>
+                        <h2>Recovery</h2>
+                        <h3>
+                            {{#unless settings.cypherShort}}
+                            1d6 + <input type="text" value="{{data.tier}}" data-dtype="Number" disabled="disabled" />
+                            {{else}}    
+                            1d6 + <input type="text" value="1" data-dtype="Number" disabled="disabled" />                        
+                            {{/unless}}
+                        </h3>
                         <ul>
                         {{#each recoveriesData as |recovery|}}
                             <li>
-                                <input type="checkbox" id="{{recovery.label}}" {{checked recovery.checked}} disabled/>
-                                <label>{{localize recovery.label}}</label>
+                                <input type="checkbox" name="data.recoveries.{{recovery.key}}" id="{{recovery.label}}" {{checked recovery.checked}}/>
+                                <label for="recoveries.action">{{recovery.label}}</label>
                             </li>
                         {{/each}}
                         </ul>
-                        <h2>{{localize "CYPHER.pc.armor.label"}}&nbsp;<input type="text" name="data.armor" value="{{data.armor}}" class="armor" min="0" data-dtype="Number" disabled="disabled" />
+                        <h2>Armor&nbsp;<input type="text" name="data.armor" value="{{data.armor}}" class="armor" min="0" data-dtype="Number" disabled="disabled" />
                         </h2>
                     </div>
                 </div>
