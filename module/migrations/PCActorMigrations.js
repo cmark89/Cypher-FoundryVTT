@@ -183,9 +183,6 @@ const PCActorv4ToV5Migrator = Object.create(Migrator);
 PCActorv4ToV5Migrator.forVersion = 5;
 PCActorv4ToV5Migrator.forType = "pc";
 
-/* Summary of changes:
-  - recoveries change to an integer total instead of being individual boolean flags
-*/
 PCActorv4ToV5Migrator.migrationFunction = async function(actor, obj = {}) {
   const newData = Object.assign({ _id: actor._id}, obj);
 

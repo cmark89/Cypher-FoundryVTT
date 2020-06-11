@@ -41,7 +41,12 @@
                     "edge": 0
                 }
             },
-            "recoveriesLeft": 4,
+            "recoveries": {
+                "action": false,
+                "tenMin": false,
+                "oneHour": false,
+                "tenHours": false
+            },
             "shins": 0,
             "tier": 1,
             "version": 5,
