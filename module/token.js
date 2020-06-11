@@ -2,8 +2,31 @@ import { CYPHER } from './config.js';
 
 export function cypherToken() {
     // Here we monkey-patch in a bunch of crap because I can see no better way to have custom token behavior
-    Token.prototype._drawAttributeBars = cypherTokenDrawAttributeBars;
-    Token.prototype._onUpdateBarAttributes = cypherOnUpdateBarAttributes;
+    //Token.prototype._drawAttributeBars = cypherTokenDrawAttributeBars;
+    //Token.prototype._onUpdateBarAttributes = cypherOnUpdateBarAttributes;
+
+    Token.prototype._drawAttributeBars = (function() {
+        let superFunction = Token.prototype._drawAttributeBars;
+        return function() {
+            if (this.actor.data.type === "pc") {
+                return cypherTokenDrawAttributeBars.apply(this, arguments);
+            } else {
+                return superFunction.apply(this, arguments);
+            }
+        };
+    })();
+
+
+    Token.prototype._onUpdateBarAttributes = (function() {
+        let superFunction = Token.prototype._onUpdateBarAttributes;
+        return function() {
+            if (this.actor.data.type === "pc") {
+                return cypherOnUpdateBarAttributes.apply(this, arguments);
+            } else {
+                return superFunction.apply(this, arguments);
+            }
+        };
+    })();
 
     // Trying to get the bar data from the config form seems a little janky (model not expecting a third bar?),
     // so let's just shove the bars onto PC characters. At least you can still configure _if_ they're shown or not!
