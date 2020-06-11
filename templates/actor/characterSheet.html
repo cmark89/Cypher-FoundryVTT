@@ -337,6 +337,9 @@
         </div>
     
         <div class="tab equipment" data-group="primary" data-tab="equipment">
+            {{#if settings.currencyName}}
+            <h3 class="shins"><i class="fas fa-coins"></i> {{settings.currencyName}} <input type="number" name="data.shins" value="{{data.shins}}" class="shins" data-dtype="Number" /></h3>
+            {{/if}}
             <h2>{{localize "CYPHER.pc.weapons.sectionName"}}</h2>
             <table class="weapons">
                 <thead>

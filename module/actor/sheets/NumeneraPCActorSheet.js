@@ -218,6 +218,7 @@ export class NumeneraPCActorSheet extends ActorSheet {
     sheetData.settings.icons.equipment = game.settings.get("cypher", "showEquipmentIcons");
     sheetData.settings.cypherShort = game.settings.get("cypher", "cypherShort");
     sheetData.settings.useCyphers = game.settings.get("cypher", "useCyphers");
+    sheetData.settings.currencyName = game.settings.get("cypher", "currencyName");
 
     //Copy labels to be used as is
     sheetData.ranges = CYPHER.ranges
