@@ -168,7 +168,7 @@ export class NumeneraNPCActorSheet extends ActorSheet {
     const attacksTable = html.find("table.attacks");
     attacksTable.on("click", ".attack-create", this.onAttackCreate.bind(this));
     attacksTable.on("click", ".attack-delete", this.onAttackDelete.bind(this));
-    attacksTable.on("change", "input", this.onAttackEdit.bind(this));
+    attacksTable.on("change", "textarea", this.onAttackEdit.bind(this));
   }
 
   /**

@@ -66,7 +66,7 @@
                             <a><i class="fas fa-grip-vertical handle"></i></a>
                         </td>
                         <td class="attack-description">
-                            <input type="text" name="data.items.attacks.{{attack._id}}.notes" value="{{attack.notes}}" placeholder="{{localize "CYPHER.npc.attacks.placeholder"}}" />
+                            <textarea type="text" name="data.items.attacks.{{attack._id}}.notes" placeholder="{{localize "CYPHER.npc.attacks.placeholder"}}">{{attack.notes}}</textarea>
                         </td>
                         <td>
                             <a class="attack-delete" data-action="delete" title="{{localize "CYPHER.npc.attacks.deleteTooltip"}}"><i class="fas fa-trash"></i></a>
