@@ -1,5 +1,4 @@
 import { NumeneraActor } from './module/actor/NumeneraActor.js';
-import { NumeneraNPCActor } from './module/actor/NumeneraNPCActor.js';
 import { NumeneraNPCActorSheet } from './module/actor/sheets/NumeneraNPCActorSheet.js';
 import { NumeneraPCActorSheet } from './module/actor/sheets/NumeneraPCActorSheet.js';
 
