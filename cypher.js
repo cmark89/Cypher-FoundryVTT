@@ -20,7 +20,6 @@ import { registerSystemSettings } from './module/settings.js';
 import { migrateWorld } from './module/migrations/migrate.js';
 import { numeneraSocketListeners } from './module/socket.js';
 import { HorrorMode } from './module/horrorMode.js';
-import { RecoveryDialog } from './module/apps/RecoveryDialog.js';
 import { registerHandlebarHelpers } from './module/handlebarHelpers.js';
 import { add3rdBarToPCTokens, cypherToken } from './module/token.js';
 import { registerHooks } from './module/hooks.js';
@@ -30,9 +29,6 @@ Hooks.once("init", function () {
     console.log('Cypher | Initializing Cypher System');
 
     game.cypher = {
-        applications: {
-            RecoveryDialog,
-        },
         useItemMacro,
     };
 

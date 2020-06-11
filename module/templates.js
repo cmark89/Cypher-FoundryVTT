@@ -11,9 +11,6 @@ export const preloadHandlebarsTemplates = async() => {
         "systems/cypher/templates/actor/characterSheet.html",
         "systems/cypher/templates/actor/npcSheet.html",
 
-        // Dialog Sheets
-        "systems/cypher/templates/dialog/recovery.html",
-
         //Item sheets
         "systems/cypher/templates/item/abilitySheet.html",
         "systems/cypher/templates/item/armorSheet.html",

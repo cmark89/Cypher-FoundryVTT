@@ -243,12 +243,13 @@ export class NumeneraPCActorSheet extends ActorSheet {
     sheetData.damageTrackData = CYPHER.damageTrack;
     sheetData.damageTrackDescription = CYPHER.damageTrack[sheetData.data.damageTrack].description;
 
-    sheetData.recoveriesData = Object.entries(CYPHER.recoveries)
-    .map(([key, value], idx) => {
+    sheetData.recoveriesData = Object.entries(
+      sheetData.actor.data.recoveries
+    ).map(([key, value]) => {
       return {
         key,
-        label: value,
-        checked: 4 - this.actor.data.data.recoveriesLeft > idx
+        label: CYPHER.recoveries[key],
+        checked: value,
       };
     });
 

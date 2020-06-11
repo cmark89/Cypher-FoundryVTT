@@ -239,14 +239,6 @@
     "CYPHER.item.weapon.description": "Description",
     "CYPHER.item.weapon.tab.rollTooltip": "Jet",
 
-    "CYPHER.recoveries.title": "Récupérations",
-    "CYPHER.recoveries.reset": "Réinitialiser",
-    "CYPHER.recoveries.noDice": "Pas de dés à lancer",
-    "CYPHER.recoveries.pools": "Réserves",
-    "CYPHER.recoveries.pointsRemaining": "Points restants ",
-    "CYPHER.recoveries.roll": "Lancer les dés",
-    "CYPHER.recoveries.accept": "Accepter",
-
     "CYPHER.dialog.confirmDeletion.title": "Confirmation de suppression",
     "CYPHER.dialog.confirmDeletion.text": "Voulez-vous vraiment supprimer ce",
     "CYPHER.dialog.confirmDeletion.ok": "OK",

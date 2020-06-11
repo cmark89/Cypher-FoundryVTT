@@ -189,23 +189,6 @@ PCActorv4ToV5Migrator.forType = "pc";
 PCActorv4ToV5Migrator.migrationFunction = async function(actor, obj = {}) {
   const newData = Object.assign({ _id: actor._id}, obj);
 
-  if (actor.data.data.recoveries) {
-    let recoveriesLeft;
-    if (actor.data.data.recoveries.tenHours)
-      recoveriesLeft = 0;
-    else if (actor.data.data.recoveries.oneHour)
-      recoveriesLeft = 1;
-    else if (actor.data.data.recoveries.tenMin)
-      recoveriesLeft = 2;
-    else if (actor.data.data.recoveries.action)
-      recoveriesLeft = 3;
-    else
-      recoveriesLeft = 4;
-  
-    newData["data.recoveriesLeft"] = recoveriesLeft;
-    newData["data.-=recoveries"] = null;
-  }
-
   //These properties have been renamed
   newData["data.stats.might.pool.value"] = actor.data.data.stats.might.pool.current;
   newData["data.stats.might.pool.max"] = actor.data.data.stats.might.pool.maximum;

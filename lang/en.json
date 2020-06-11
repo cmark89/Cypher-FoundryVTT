@@ -240,14 +240,6 @@
     "CYPHER.item.weapon.description": "Description",
     "CYPHER.item.weapon.tab.rollTooltip": "Roll",
 
-    "CYPHER.recoveries.title": "Recoveries",
-    "CYPHER.recoveries.reset": "Reset",
-    "CYPHER.recoveries.noDice": "No dice to roll",
-    "CYPHER.recoveries.pools": "Pools",
-    "CYPHER.recoveries.pointsRemaining": "Remaining Points",
-    "CYPHER.recoveries.roll": "Roll",
-    "CYPHER.recoveries.accept": "Accept",
-
     "CYPHER.dialog.confirmDeletion.title": "Confirm Deletion",
     "CYPHER.dialog.confirmDeletion.text": "Do you really want to delete this",
     "CYPHER.dialog.confirmDeletion.ok": "OK",
