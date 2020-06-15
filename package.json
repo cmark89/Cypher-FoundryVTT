@@ -1,6 +1,6 @@
 {
   "name": "cypher-foundryvtt",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "A fork of SolarBear's Numenera system for use with non-specific Cypher System games.",
   "dependencies": {},
   "devDependencies": {
