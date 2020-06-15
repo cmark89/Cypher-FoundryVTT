@@ -24,7 +24,7 @@ export const registerSystemSettings = function() {
     scope: "world",
     config: true,
     type: String,
-    default: "none",
+    default: "meters",
     choices: {
       "none": "None",
       "feet": "Feet",
