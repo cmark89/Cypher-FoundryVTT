@@ -16,6 +16,23 @@ export const registerSystemSettings = function() {
   });
 
   /**
+   * Configure distance settings
+   */
+  game.settings.register("cypher", "measureDistanceInUnits", {
+    name: "Measurement Units",
+    hint: "Select the measurement unit of your game to get a distance annotation when using the ruler.",
+    scope: "world",
+    config: true,
+    type: String,
+    default: "none",
+    choices: {
+      "none": "None",
+      "feet": "Feet",
+      "meters": "Meters",
+    }
+  });
+
+  /**
    * Configure cypher short character sheet options
    */
   game.settings.register("cypher", "cypherShort", {
